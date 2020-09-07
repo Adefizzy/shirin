@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="69" height="89" viewBox="0 0 69 89">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#D7DBEC" d="M62.4.784L4.8.8v48.537c0 .44 57.6.25 57.6 0V.784z" transform="translate(.4 .8)"/>
+        <path fill="#AEB3CD" d="M67.2 7.2L0 7.2 0 87.2 4.4 82.4 8.4 87.2 12.8 82.4 16.8 87.2 21.2 82.4 25.2 87.2 29.6 82.4 33.6 87.2 38 82.4 42 87.2 46.4 82.4 50.4 87.2 54.8 82.4 58.8 87.2 63.2 82.4 67.2 87.2z" transform="translate(.4 .8)"/>
+        <path fill="#FFF" fill-rule="nonzero" d="M17.317 22.822L19.483 25.178 12.287 31.792 8.495 28.173 10.705 25.858 12.328 27.408z" transform="translate(.4 .8)"/>
+        <path fill="#FFF" d="M25.6 25.6H56V28.8H25.6z" transform="translate(.4 .8)"/>
+        <path fill="#FFF" fill-rule="nonzero" d="M17.317 36.422L19.483 38.778 12.287 45.392 8.495 41.773 10.705 39.458 12.328 41.008z" transform="translate(.4 .8)"/>
+        <path fill="#FFF" d="M25.6 39.2H56V42.400000000000006H25.6z" transform="translate(.4 .8)"/>
+        <path fill="#FFF" fill-rule="nonzero" d="M17.317 50.022L19.483 52.378 12.287 58.992 8.495 55.373 10.705 53.058 12.328 54.608z" transform="translate(.4 .8)"/>
+        <path fill="#FFF" d="M25.6 52.8H56V56H25.6z" transform="translate(.4 .8)"/>
+    </g>
+</svg>
