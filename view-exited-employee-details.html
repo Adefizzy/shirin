@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>Shirin</title>
+  <base target="_self">
+  <meta name="description" content="Shirin"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" value="notranslate">
+  <!-- <link rel="shortcut icon" href="/images/cp_ico.png"> -->
+  <!--stylesheets / link tags loaded here-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/smallerscreen.css" rel="stylesheet">
+  <style>
+    .add-wrapper {
+        max-width: 100%;
+    }
+    .addModal h5 {
+        font-size: 2.4rem;
+        font-weight: 600;
+    }
+  </style>
+</head>
+
+<body style="background: #fafafb;">
+  <nav class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse mb-3" style="display: block;">
+    <div class="container-fluid" style="padding-left: 0;">
+      <div class="row">
+        <div class="col-lg-2 col-md-3">
+          <div class="logo-wrapper">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+              <!-- <span class="navbar-toggler-icon"></span> -->
+              <i class="fa fa-bars"></i>
+            </button>
+            <div class="flex-row d-flex">
+              <a class="navbar-brand mb-1 logo" href="#">SHIRIN</a>
+              <button type="button" class="hidden-md-up navbar-toggler" data-toggle="offcanvas" title="Toggle responsive left sidebar">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <i class="fa fa-bars"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-10 col-md-9">
+          <div class="navbar-collapse collapse" id="collapsingNavbar">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <i class="fa fa-cog"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <i class="fa fa-bell"></i>
+                  <div class="notification-number">2</div>
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle d-flex" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="mr-2">
+                    <img src="images/user.png" class="img-fluid" alt="user image">
+                  </div>
+                  <div>
+                    <p class="user-name">Stephen Austin</p>
+                    <p class="user-role mt-1">Chief manager</p>
+                  </div>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </nav>
+  <div class="container-fluid" id="main">
+    <div class="row row-offcanvas row-offcanvas-left">
+      <div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
+        <form>
+          <div class="form-group">
+            <input type="text" name="search" class="form-control" placeholder="Search">
+            <i class="fa fa-search search"></i>
+          </div>
+        </form>
+        <ul class="nav flex-column">
+          <li class="nav-item mt-3">
+            <a class="nav-link" href="dashboard.html">
+              <img src="images/dashboard.svg" class="img-fluid" alt="an icon"> &nbsp;Dashboard
+            </a>
+          </li>
+          <hr>
+          <span>CRM</span>
+          <li class="nav-item">
+            <a class="nav-link" href="deals.html">
+              <img src="images/deals.svg" class="img-fluid" alt="an icon"> &nbsp;Deals
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tasks.html">
+              <img src="images/task.svg" class="img-fluid" alt="an icon"> &nbsp;Tasks
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.html">
+              <img src="images/product.svg" class="img-fluid" alt="an icon"> &nbsp;Products
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contacts.html">
+              <img src="images/contact.svg" class="img-fluid" alt="an icon"> &nbsp;Contact
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="company.html">
+              <img src="images/company.svg" class="img-fluid" alt="an icon"> &nbsp;Company
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="activity-owner.html">
+              <img src="images/settings.svg" class="img-fluid" alt="an icon"> &nbsp;Activity Owner
+            </a>
+          </li>
+          <hr>
+          <span>HUMAN RESOURCES</span>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#parameterSettings">
+              <img src="images/parameter-setting.svg" class="img-fluid" alt="an icon"> &nbsp;Parameter Settings <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="parameterSettings">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="grades.html">Employee Grade</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="departments.html">Employee Department</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="work-days.html">Works Days</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="leave-types.html">Leave Type</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="locations.html">Location</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="organizations.html">Organization Subsidiary</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#employeesModule">
+              <img src="images/parameter-setting.svg" class="img-fluid" alt="an icon"> &nbsp;Employees <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="employeesModule">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="employee-leaves.html">Leave Management</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="employee.html">Employee Information</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link active" href="exited-employee.html">Exited Employees</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="employee-absences.html">Absenteeism</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#compensations">
+              <img src="images/benefit.svg" class="img-fluid" alt="an icon"> &nbsp;Compensation/Benefit <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="compensations">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="employee-remunerations.html">Employee Remuneration</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="employee-bonuses.html">Employee Bonus</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="employee-deductions.html">Employee Deduction</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#payroll">
+              <img src="images/payroll.svg" class="img-fluid" alt="an icon"> &nbsp;Payroll
+              <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="payroll">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="draft-payroll.html">Draft Payroll</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="generate-payroll.html">Generate Payroll</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="payroll-archive.html">Payroll Archive</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="payslip.html">Payslip</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#hr-reports">
+              <img src="images/reports.svg" class="img-fluid" alt="an icon"> &nbsp;Reports
+              <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="hr-reports">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="employee-data.html">Employee Data</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="tax-report.html">Tax Report</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="employee-pension.html">Single Employee Pension Report</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="employees-pension-report.html">Employees Pension Report</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="nhf-report.html">NHF Report</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#settings">
+              <img src="images/settings.svg" class="img-fluid" alt="an icon"> &nbsp;Settings
+              <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="settings">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="statutory-deductions.html">Statutory Deductions</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="payroll-breakdown.html">Payroll Breakdown</a>
+              </li>
+            </ul>
+          </li>
+          <hr>
+          <span>Finance</span>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#accounts">
+              <img src="images/account.svg" class="img-fluid" alt="an icon"> &nbsp;Accounts
+              <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="accounts">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="account-chart.html">Chart of Accounts</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="journal-postings.html">Journal Postings</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="transactions.html">Transactions</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#banking">
+              <img src="images/banking.svg" class="img-fluid" alt="an icon"> &nbsp;Banking
+              <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="banking">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="bank-accounts.html">Bank Accounts</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="bank-transfer.html">Bank Transfer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#income-tracker">
+              <img src="images/income-tracker.svg" class="img-fluid" alt="an icon"> &nbsp;Income Tracker <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="income-tracker">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="credit-sales.html">Credit Sales</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="cash-sales.html">Cash Sales</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="clients.html">Clients</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#expense-tracker">
+              <img src="images/expense-tracker.svg" class="img-fluid" alt="an icon"> &nbsp;Expense Tracker <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="expense-tracker">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="bills.html">Bills</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="vendors.html">Vendor</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#finance-reports">
+              <img src="images/reports.svg" class="img-fluid" alt="an icon"> &nbsp;Reports
+              <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="finance-reports">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="trial-balance.html">Trial Balance</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="profit-loss.html">Profit & Loss</a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="balance-sheet.html">Balance Sheet</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#finance-settings">
+              <img src="images/tax.svg" class="img-fluid" alt="an icon"> &nbsp;Settings
+              <i class="fa fa-angle-down pull-right mt-2"></i>
+            </a>
+
+            <ul class="collapse human-resources" id="finance-settings">
+              <li class="nav-item mt-3">
+                <a class="nav-link" href="tax-rates.html">Tax Rates</a>
+              </li>
+            </ul>
+          </li>
+          
+        </ul>
+      </div>
+      <!--/col-->
+
+      <div class="col-md-9 col-lg-10 main">
+        <div class="dashboard">
+          <br>
+          <div>
+            <div>
+              <a href="employee.html" class="back"><i class="fa fa-angle-left"></i>&nbsp; Back to Employee Information</a>
+              <h3>Employee</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 col-md-7">
+                    <div class="add-wrapper">
+                        <h6>Employee Details</h6>
+                        <p class="overview">Here’s a detailed overview of your profile</p>
+                        <hr class="mt-5 mb-4">
+                        <div class="d-flex space-between">
+                            <div>
+                                <p class="employee-name">Bio Information</p>
+                            </div>
+                            <div>
+                                <div class="d-flex">
+                                    <div class="mr-4">
+                                        <a href="" class="add-client" data-toggle="modal" data-target="#employeeCVModal">Employee CV</a>
+                                    </div>
+                                    <div>
+                                      <a href="edit-employee-data.html" class="add-client">Update Employee Data</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>First Name</p> 
+                                    <p class="employee-name">Tope</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Last Name</p> 
+                                    <p class="employee-name">Odun</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Middle Name</p> 
+                                    <p class="employee-name">Eshin</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Age</p> 
+                                    <p class="employee-name">30</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Race</p> 
+                                    <p class="employee-name">White</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Gender</p> 
+                                    <p class="employee-name">Female</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Religion</p> 
+                                    <p class="employee-name">Buddhism</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Date of Birth</p> 
+                                    <p class="employee-name">Nov 11, 1989</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>RNationality</p> 
+                                    <p class="employee-name">Nagari</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>State of Origin</p> 
+                                    <p class="employee-name">Lagos</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Phone Number</p> 
+                                    <p class="employee-name">08080808087</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Offcial Email Address</p> 
+                                    <p class="employee-name">tope@uber.com.ng</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Personal Email Address</p> 
+                                    <p class="employee-name">topeodun@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Location/Home Address</p> 
+                                    <p class="employee-name">21 Adeola Odeku, VI</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Disability</p> 
+                                    <p class="employee-name">No</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>No of Children</p> 
+                                    <p class="employee-name">5</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Date Hired</p> 
+                                    <p class="employee-name">Mar 31, 2020</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Exit Date</p>
+                                    <p class="employee-name">Mar 31, 2020</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Bank</p> 
+                                    <p class="employee-name">Zenith Bank</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Account Number</p> 
+                                    <p class="employee-name">055050888</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Assigned Work Addresses</p> 
+                                    <p class="employee-name"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Grade Level</p> 
+                                    <p class="employee-name">Level 1</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Company Assigned</p> 
+                                    <p class="employee-name">Tolu Ent</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Marital Status</p> 
+                                    <p class="employee-name">Married</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Designation</p> 
+                                    <p class="employee-name">Executive</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Valid ID</p> 
+                                    <p class="employee-name">international-passport</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Valid ID Number</p> 
+                                    <p class="employee-name"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p class="employee-name">Name of Next Of Kin</p> 
+                                    <p class="employee-name">Seun</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Contact of Next of kin</p> 
+                                    <p class="employee-name">0808080808</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Relationship</p> 
+                                    <p class="employee-name">Brother</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Name of guarantor</p> 
+                                    <p class="employee-name">Edmund</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>Contact of guarantor</p> 
+                                    <p class="employee-name">080808666</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>Gross Salary</p> 
+                                    <p class="employee-name">15,000,000.00</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <div class="mt-4">
+                                    <p>PFA</p> 
+                                    <p class="employee-name">Lagos</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="mt-4">
+                                    <p>PEN-PIN</p> 
+                                    <p class="employee-name">254255</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="d-flex space-between mb-4">
+                            <div>
+                                <p class="employee-name">Department</p>
+                            </div>
+                            <div>
+                                <a href="" class="add-client" data-toggle="modal" data-target="#addDeptModal">Add Department</a>
+                            </div>
+                        </div>
+                        <div class="table-responsive deals-table">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>
+                                  <p>Name</p>
+                                </th>
+                                <th>
+                                  <p>Remarks</p>
+                                </th>
+                                <th>
+                                  <p>Start Date</p>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <p class="my-4">Finance and Accounting</p>
+                                </td>
+                                <td>
+                                  <p class="my-4"></p>
+                                </td>
+                                <td>
+                                  <p class="my-4">Mar 31, 2020</p>
+                                </td>
+                              </tr>
+                              <tr class="space"></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="d-flex space-between">
+                            <div>
+                                <p class="employee-name">Employee Files</p>
+                            </div>
+                            <div>
+                                <a href="" class="add-client" data-toggle="modal" data-target="#addFileModal">Add Files</a>
+                            </div>
+                        </div>
+                        <div class="table-responsive deals-table">
+                          <p class="py-5">No fies added</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5">
+                    <div class="add-wrapper tips-wrapper">
+                        <h5 class="mb-5">Tips</h5> 
+                        <div>
+                            <p class="mb-5">You’re the one who does everything at your company. Running the payroll, hiring new employees, making sure everything is compliant, 
+                                and oh yeah, building your business. Shirin is here  </p>
+                            <ul>
+                                <li>LIRS Taxes</li>
+                                <li>Pension</li>
+                                <li>Bonuses Payment</li>
+                            </ul>
+                        </div>
+                        <hr>
+                        <div>
+                            <p class="all-deduction">All Deduction Done</p>
+                            <p>All your LIRS taxes are calculated, filed, and paid automatically. You can set payroll to run automatically each pay period. Nice!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+
+  <!-- employee CV  modal-->
+  <div class="modal addModal" id="employeeCVModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title">Employee CV Upload</h6>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h5 class="text-center">Employee CV not found</h5>
+          <form class="add-form">
+            <div class="form-group">
+              <label for="CV-upload">Upload CV</label>
+              <input type="file" class="form-control" name="CV-upload" id="CV-upload" required>
+            </div>
+            <div class="d-flex" style="justify-content: flex-end;">
+                <button class="btn btn-info btn-download mt-4">Upload</button>
+                <button class="btn btn-info btn-cancel mt-4" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- add departtment modal-->
+  <div class="modal addModal" id="addDeptModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title">Assign Department</h6>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form class="add-form">
+            <div class="form-group">
+              <label for="departments">Departments</label>
+              <select class="form-control" id="departments">
+                <option value="">Finance [FN01]</option>
+                <option value="">Human Resource [HR01]</option>
+                <option value="">Technology [TECH01]</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label for="remarks">Remarks</label>
+                <textarea class="form-control" id="remarks" cols="3"></textarea>
+            </div>
+            <div class="d-flex" style="justify-content: flex-end;">
+                <button class="btn btn-info btn-download mt-4">Add</button>
+                <button class="btn btn-info btn-cancel mt-4" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- add file  modal-->
+   <div class="modal addModal" id="addFileModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title">Add File</h6>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form class="add-form">
+            <div class="form-group">
+              <label for="file-upload">Upload File</label>
+              <input type="file" class="form-control" name="file-upload" id="file-upload" required>
+            </div>
+            <div class="d-flex" style="justify-content: flex-end;">
+                <button class="btn btn-info btn-download mt-4">Upload</button>
+                <button class="btn btn-info btn-cancel mt-4" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--scripts loaded here-->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $("[data-toggle=offcanvas]").click(function() {
+        $(".row-offcanvas").toggleClass("active");
+      });
+    });
+  </script>
+</body>
+
+</html>
