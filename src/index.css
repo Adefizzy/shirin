@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'gelion';
+  src: local('gelion'), url(./fonts/gelion.woff) format('woff');
+}
+*{
+  box-sizing: border-box !important;
+}
+
+body {
+  margin: 0;
+  font-family: gelion, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif !important; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+p{
+  margin-bottom: 0px;
+}
