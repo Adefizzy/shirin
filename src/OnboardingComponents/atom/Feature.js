@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {CustomCheckBox} from './CustomCheckBox';
 import { primaryColor, mutedColor, deepPrimaryColor, device} from './../../GlobalAccets';
@@ -6,9 +6,9 @@ import { primaryColor, mutedColor, deepPrimaryColor, device} from './../../Globa
 
 export const FeatureScaffold = (props) => {
     return (
-        <Feature>
-            <CustomCheckBox/>
-            <p>Employee Leave</p>
+        <Feature active={props.active} onClick={props.onClick}>
+            <CustomCheckBox active={props.active}/>
+            <p>{props.featureName}</p>
         </Feature>
     );
 };
@@ -18,13 +18,9 @@ const Feature = styled.div`
     border: solid 1px #aeb3cd;
     border-radius: 8px;
     padding: 7px 10px;
-   
     display: flex;
     align-items: center;
-    & div{
-            border: 1px solid #d2d5e1;
-    }
-
+    margin-top: 21px;
     & p{
         color: ${mutedColor};
         font-size: 1.2vw;
@@ -32,4 +28,10 @@ const Feature = styled.div`
         margin-left: 12px;
     }
 
+    &:hover{
+        cursor: pointer;
+        div{
+            border:  1px solid ${props => !props.active? '#d2d5e1': 'none'};
+        }
+    }
 `

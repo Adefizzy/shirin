@@ -28,7 +28,7 @@ export const CompanyDetailsOnboarding = (props) => {
             image = {companyDetailImage}
             imageWidth='100%'
             childComponent={
-                <Col  lg={{span: 16, offset: 4}} sm={{span: 20, offset: 2}}>
+                <Col  lg={{span: 18, offset: 3}} sm={{span: 20, offset: 2}}>
                     <InputDiv>
                         <p>Whats the name of your company?</p>
                         <StyledInput size='large'/>
@@ -43,7 +43,6 @@ export const CompanyDetailsOnboarding = (props) => {
             />
     );
 }
-
 
 
 const StyledInput = styled(Input)`

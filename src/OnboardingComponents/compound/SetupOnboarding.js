@@ -1,12 +1,119 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { OnboardingScaffold } from '../element/OnboardingScaffold';
 import styled from 'styled-components';
 import setupImage from './../../images/setup.png';
 import { Col } from 'antd';
 import { primaryColor, mutedColor, deepPrimaryColor, device} from './../../GlobalAccets';
-import {Features} from './../element/Features';
+import {FeaturesScaffold} from './../element/Features';
+import { FeatureScaffold } from './../atom/Feature';
+import { PrimaryButton } from '../../GlobalComponents/atoms/primaryButton'
+
+
+const basicFeatures = [
+    {name: 'HR Basic', isActive: false },
+    {name :'Employee Leave',isActive: false}, 
+    {name: 'Payslips', isActive: false},
+    {name:'CRM module', isActive: false}
+];
+const advanceFeatures = [
+        {name: 'HR Basic', isActive: false },
+        {name :'Employee Leave',isActive: false}, 
+        {name: 'Payslips', isActive: false}, 
+        {name:'CRM module', isActive: false}, 
+        {name: 'Attendance',isActive: false}, 
+        {name: 'Staff Management', isActive: false}
+    ];
 
 export const SetupOnboarding = (props) => {
+    const [advanceFeatureState, setAdvanceFeatureState] = useState(advanceFeatures);
+    const [advanceText, setAdvanceText] = useState('Select all');
+    const [basicFeatureState, setBasicFeatureState] = useState(basicFeatures);
+    const [basicText, setBasicText] = useState('Select all');
+
+    const onFeatureSelect = (name) => {
+        let newFeatures = [...advanceFeatureState].map(feature => {
+            if(name === feature.name){
+                feature.isActive = !feature.isActive;
+                return feature;
+            }
+
+            return feature;
+        });
+
+        setAdvanceFeatureState(newFeatures)
+    }
+
+    const onBasicSelect = (name) => {
+        let newFeatures = [...basicFeatureState].map(feature => {
+            if(name === feature.name){
+                feature.isActive = !feature.isActive;
+                return feature;
+            }
+
+            return feature;
+        });
+
+        setBasicFeatureState(newFeatures)
+    }
+
+    const onSelectAllBasicFeatures = () => {
+        if(basicText === 'Select all'){
+            let newFeatures = basicFeatureState.map(feature => {
+                        feature.isActive = true;
+                        return feature;
+            });
+            setBasicFeatureState(newFeatures);
+            setBasicText('Uncheck all');
+         }else{
+            let newFeatures = basicFeatureState.map(feature => {
+                feature.isActive = false;
+                return feature;
+            });
+            setBasicFeatureState(newFeatures);
+            setBasicText('Select all');
+         }
+    }
+
+    const onSelectAllAdvanceFeatures = () => {
+        if(advanceText === 'Select all'){
+            let newFeatures = advanceFeatures.map(feature => {
+                        feature.isActive = true;
+                        return feature;
+            });
+            setAdvanceFeatureState(newFeatures);
+            setAdvanceText('Uncheck all');
+         }else{
+            let newFeatures = advanceFeatures.map(feature => {
+                feature.isActive = false;
+                return feature;
+            });
+            setAdvanceFeatureState(newFeatures);
+            setAdvanceText('Select all');
+         }
+    }
+
+    const advanceFeatureList = advanceFeatureState.map((feature, index) => {
+        return <FeatureScaffold 
+                    key={index}
+                    featureName={feature.name} 
+                    active={feature.isActive} 
+                    onClick={() => onFeatureSelect(feature.name)}
+                />
+    });
+
+    const basicFeatureList = basicFeatureState.map((feature, index) => {
+        return <FeatureScaffold 
+                    key={index}
+                    featureName={feature.name} 
+                    active={feature.isActive} 
+                    onClick={() => onBasicSelect(feature.name)}
+                />
+    });
+
+    const onSubmit = () => {
+
+    }
+
     return (
         <OnboardingScaffold
         headerText='Final Steps…'
@@ -16,18 +123,24 @@ export const SetupOnboarding = (props) => {
         image = {setupImage}
         imageWidth='60%'
         childComponent={
-            <Col  lg={{span: 16, offset: 4}} sm={{span: 20, offset: 2}}>
-                <Features
+            <Col  lg={{span: 18, offset: 3}} sm={{span: 20, offset: 2}}>
+                <FeaturesScaffold
                 featureType= 'Basic Features'
-                actionText='Select All'
+                actionText={basicText}
+                onSelectAll={onSelectAllBasicFeatures}
+                features={basicFeatureList}
                 />
-                <Features
+                <FeaturesScaffold
                 featureType= 'Advance Features'
-                actionText='Check all'
+                actionText={advanceText}
+                onSelectAll={onSelectAllAdvanceFeatures}
+                features={advanceFeatureList}
                 />
+                <PrimaryButton text='Continue to Finance Module' onClick={onSubmit}/>
             </Col>
         }
         />
     );
-};
+}
+
 

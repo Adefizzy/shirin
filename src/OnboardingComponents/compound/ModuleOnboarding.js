@@ -12,18 +12,46 @@ import { ModuleTypeScaffold } from '../element/ModuleType';
 import {PrimaryButton} from '../../GlobalComponents/atoms/primaryButton';
 import { useParams, useRouteMatch, useHistory, Route, Switch, Link } from 'react-router-dom';
 
+
+const modules = [
+    {name: 'HR Module', description: '83 Features | N2,000/month', image: hrModule, isActive: false},
+    {name: 'Finance Module', description: '83 Features | N2,000/month', image: financeModule, isActive: false },
+    {name: 'CRM Module', description: '83 Features | N2,000/month', image: crmModule, isActive: false }
+]
+
 export const ModuleOnboarding = (props) => {
     const {path, url} = useRouteMatch();
     const [selectedModule, setModule] = useState('');
+    const [moduleState, setModules] = useState(modules);
     const history = useHistory();
 
     const handleSubmit = () => {
         history.push(`setup`);
     }
 
-    const handleModuleSelection = (module) => {
-        setModule(module)
+    const handleModuleSelection = (name) => {
+       let newModuleList = [...moduleState].map(module => {
+           if(module.name === name){
+               module.isActive = !module.isActive;
+               return module;
+           }
+
+           return module;
+       })
+
+       setModule(newModuleList);
     }
+
+    const moduleList = [...moduleState].map((module, index)=> {
+        return <ModuleTypeScaffold
+                    key={index}
+                    image={module.image}
+                    moduleName={module.name}
+                    moduleDescription={module.description}
+                    active={module.isActive}
+                    onClick={() => handleModuleSelection(module.name)}
+                />
+    });
     return (
         <OnboardingScaffold
         headerText='Welcome, Chopnow'
@@ -33,35 +61,17 @@ export const ModuleOnboarding = (props) => {
         image = {moduleImage}
         imageWidth='80%'
         childComponent={
-            <Col  lg={{span: 16, offset: 4}} sm={{span: 20, offset: 2}}>
+            <Col  lg={{span: 18, offset: 3}} sm={{span: 20, offset: 2}}>
                 <Description>Click to select the services your business needs</Description>
-                <ModuleTypeScaffold
-                    image={hrModule}
-                    moduleName='HR Module'
-                    moduleDescription='83 Features | N2,000/month'
-                    active={selectedModule === 'hr'}
-                    onClick={() => handleModuleSelection('hr')}
-                />
-                <ModuleTypeScaffold
-                    image={financeModule}
-                    moduleName='Finance Module'
-                    moduleDescription='83 Features | N2,000/month'
-                    active={selectedModule === 'finance'}
-                    onClick={() => handleModuleSelection('finance')}
-                />
-                <ModuleTypeScaffold
-                    image={crmModule}
-                    moduleName='CRM Module'
-                    moduleDescription='83 Features | N2,000/month'
-                    active={selectedModule === 'crm'}
-                    onClick={() => handleModuleSelection('crm')}
-                />
+                {moduleList}
                 <PrimaryButton text='Continue' onClick={handleSubmit}/>
             </Col>
         }
         />
     );
 };
+
+
 
 
 const Description = styled.p`

@@ -4,31 +4,26 @@ import {CustomCheckBox} from '../atom/CustomCheckBox';
 import { primaryColor, mutedColor, deepPrimaryColor, device} from './../../GlobalAccets';
 import {FeatureScaffold} from './../atom/Feature';
 
-export const Features = (props) => {
+export const FeaturesScaffold = (props) => {
     return (
-        <BasicFeatures>
-            <BasicFeaturesHeader>
+        <Features>
+            <FeaturesHeader>
                 <h1>{props.featureType}</h1>
-                <p>{props.actionText}</p>
-            </BasicFeaturesHeader>
-            <BasicFeaturesFooter>
-               <FeatureScaffold/>
-               <FeatureScaffold/>
-               <FeatureScaffold/>
-               <FeatureScaffold/>
-               <FeatureScaffold/>
-               <FeatureScaffold/>
-            </BasicFeaturesFooter>
-        </BasicFeatures>
+                <p onClick={props.onSelectAll}>{props.actionText}</p>
+            </FeaturesHeader>
+            <FeaturesFooter>
+               {props.features}
+            </FeaturesFooter>
+        </Features>
     );
 };
 
 
-const BasicFeatures = styled.div`
+const Features = styled.div`
     min-width: 100%;
-    margin-top: 20px;
+    margin-top: 40px;
 `
-const BasicFeaturesHeader = styled.div`
+const FeaturesHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -37,20 +32,22 @@ const BasicFeaturesHeader = styled.div`
         font-size: 1.5vw;
         font-weight: 600;
         color:#000000;
+        margin-bottom: 0px;
     }
 
     & p{
         color: ${mutedColor};
         cursor: pointer;
+        margin-bottom: 0px;
     }
 `
 
-const BasicFeaturesFooter = styled.div`
+const FeaturesFooter = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 `
-
+/* 
 const Feature = styled.div`
     width: 48%;
     border: solid 1px #aeb3cd;
@@ -70,4 +67,4 @@ const Feature = styled.div`
         margin-left: 12px;
     }
 
-`
+` */

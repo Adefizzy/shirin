@@ -7,20 +7,27 @@ import Logo from '../../images/logo.png';
 import companyDetailImage from '../../images/companyDetailImage.png';
 import {Row, Col, Typography} from 'antd';
 import { ProgressStageScaffold } from './../atom/ProgressStage';
+import {useHistory} from 'react-router-dom';
 
 const { Title, Paragraph } = Typography;
 
 
+
 export const  OnboardingScaffold = (props) => {
+    const history = useHistory();
+
+    const onBackClick = () => {
+        history.goBack();
+    }
     return (
         <MainComponent>
             <FirstSubSection sm={{span: 24}} lg={{span: 10}}>
                 <Row>
-                    <Col lg={{span: 16, offset: 4}} sm={{span: 20, offset: 2}}>
+                    <Col lg={{span: 18, offset: 3}} sm={{span: 20, offset: 2}}>
                     <div style={{minHeight: '16vh', marginTop: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'}}>
                     <BackNavigator>
                         <StyledFiChevronLeft/>
-                        <p>Back</p>
+                        <p onClick={onBackClick}>Back</p>
                     </BackNavigator>
                     <StyleLogo src={Logo}/>
                          <HeaderText>{props.headerText}</HeaderText>

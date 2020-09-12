@@ -34,7 +34,7 @@ const ModuleType = styled.div`
 
     &:hover{
         div:nth-child(3){
-            border: 1px solid #d2d5e1;
+            border: 1px solid ${props => !props.active? '#d2d5e1': 'none'};
         }
     }
 `
