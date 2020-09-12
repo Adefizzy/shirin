@@ -6,7 +6,8 @@ import { Col } from 'antd';
 import { primaryColor, mutedColor, deepPrimaryColor, device} from './../../GlobalAccets';
 import {FeaturesScaffold} from './../element/Features';
 import { FeatureScaffold } from './../atom/Feature';
-import { PrimaryButton } from '../../GlobalComponents/atoms/primaryButton'
+import { PrimaryButton } from '../../GlobalComponents/atoms/primaryButton';
+import {useHistory} from 'react-router-dom';
 
 
 const basicFeatures = [
@@ -29,6 +30,7 @@ export const SetupOnboarding = (props) => {
     const [advanceText, setAdvanceText] = useState('Select all');
     const [basicFeatureState, setBasicFeatureState] = useState(basicFeatures);
     const [basicText, setBasicText] = useState('Select all');
+    const history = useHistory();
 
     const onFeatureSelect = (name) => {
         let newFeatures = [...advanceFeatureState].map(feature => {
@@ -111,7 +113,7 @@ export const SetupOnboarding = (props) => {
     });
 
     const onSubmit = () => {
-
+        history.push('onboarding-success')
     }
 
     return (
