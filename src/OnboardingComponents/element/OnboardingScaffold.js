@@ -17,7 +17,7 @@ export const  OnboardingScaffold = (props) => {
     const history = useHistory();
 
     const onBackClick = () => {
-        history.goBack();
+        history.goBack()
     }
     return (
         <MainComponent>

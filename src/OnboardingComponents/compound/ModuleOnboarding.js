@@ -64,6 +64,7 @@ export const ModuleOnboarding = (props) => {
             <Col  lg={{span: 18, offset: 3}} sm={{span: 20, offset: 2}}>
                 <Description>Click to select the services your business needs</Description>
                 {moduleList}
+                <div style={{ marginBottom: '40px'}}></div>
                 <PrimaryButton text='Continue' onClick={handleSubmit}/>
             </Col>
         }

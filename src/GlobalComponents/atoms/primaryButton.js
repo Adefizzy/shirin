@@ -23,21 +23,38 @@ const buttonStyle = styled.button`
     border: none;
     padding: 14px 0px;
     border-radius: 6px;
-    margin-top: 40px;
+   
 
     &:focus{
         outline: none;
     }
 `
 
-const StyledButton = styled(buttonStyle)`
+const StyledButton = styled.button`
+    font-size: 1.2vw;
+    border: none;
+    padding: 14px 0px;
+    border-radius: 6px;
     background-color: ${primaryColor};
     color: #fff;
     min-width: 100%;
+    &:focus{
+        outline: none;
+    }
 `
-const StyledButtonWhite = styled(buttonStyle)`
+const StyledButtonWhite = styled.button`
     background-color: #fff;
     color: ${primaryColor};
     min-width: 70%;
+    margin-top: 40px;
+    font-size: 1.2vw;
+    border: none;
+    padding: 14px 0px;
+    border-radius: 6px;
+   
+
+    &:focus{
+        outline: none;
+    }
 `
 

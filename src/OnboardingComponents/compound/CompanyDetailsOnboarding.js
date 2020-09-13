@@ -37,6 +37,7 @@ export const CompanyDetailsOnboarding = (props) => {
                         <p>What does your business do? (Optional)</p>
                         <StyledTextArea rows={2} />
                     </InputDiv>
+                    
                     <PrimaryButton text='Let’s get started' onClick={handleSubmit}/>
                 </Col>
             }
@@ -51,7 +52,7 @@ const StyledInput = styled(Input)`
     font-size: 1.2vw;
     border: solid 1px #aeb3cd;
 
-    &:focus{
+    &:focus, &:hover{
         border: solid 1px ${primaryColor};
         outline: none;
         box-shadow: none;
@@ -59,13 +60,14 @@ const StyledInput = styled(Input)`
 `
 
 const StyledTextArea = styled(TextArea)`
-     padding: 10.5px 19px;
+    padding: 10.5px 19px;
     border-radius: 6px;
     font-size: 1.2vw;
     border: solid 1px #aeb3cd;
     resize: none;
+    margin-bottom: 40px;
 
-    &:focus{
+    &:focus, &:hover{
         border: solid 1px ${primaryColor};
         outline: none;
         box-shadow: none;

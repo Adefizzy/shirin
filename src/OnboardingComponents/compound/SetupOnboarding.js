@@ -138,6 +138,7 @@ export const SetupOnboarding = (props) => {
                 onSelectAll={onSelectAllAdvanceFeatures}
                 features={advanceFeatureList}
                 />
+                <div style={{ marginBottom: '40px'}}></div>
                 <PrimaryButton text='Continue to Finance Module' onClick={onSubmit}/>
             </Col>
         }

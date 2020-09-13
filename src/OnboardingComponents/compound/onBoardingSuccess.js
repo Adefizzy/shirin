@@ -1,12 +1,18 @@
 import React from 'react';
 import {Row, Col} from 'antd';
 import { primaryColor, mutedColor, deepPrimaryColor, device} from './../../GlobalAccets';
-import {PrimaryButtonWhite} from '../../GlobalComponents/atoms/primaryButton';
+import {PrimaryButtonWhite, PrimaryButton} from '../../GlobalComponents/atoms/primaryButton';
 import styled from 'styled-components';
 import ShirinLogo from '../../images/logo_w.png';
 import SuccessImage from '../../images/successImage.png';
+import { useHistory } from 'react-router-dom';
 
-export const onBoardingSuccess = (Props) => {
+export const OnBoardingSuccess = (props) => {
+    const history = useHistory();
+
+    const onSubmit = () => {
+        history.push('signup');
+    }
     return (
         <StyledRow>
             <StyledWelcomeMessage lg={{span: 12}} >
@@ -14,7 +20,7 @@ export const onBoardingSuccess = (Props) => {
                     <StyledImage src={ShirinLogo}/>
                     <h1>Your Chopnow team account has been created</h1>
                     <p>You can select the different modules (CRM, HR and Finance) that satisfy your business needs which will afford you amazing features</p>
-                    <StyledButton text='Continue to Dashboard'/>
+                    <StyledButton text='Continue to Dashboard' onClick={onSubmit}/>
                 </StyledInnerDiv>
             </StyledWelcomeMessage>
             <StyledSuccessImage lg={{span: 12}}>
