@@ -5,6 +5,7 @@ import {ModuleOnboarding} from './OnboardingComponents/compound/ModuleOnboarding
 import { SetupOnboarding } from './OnboardingComponents/compound/SetupOnboarding';
 import { OnBoardingSuccess } from './OnboardingComponents/compound/onBoardingSuccess';
 import { SignUp } from './OnboardingComponents/compound/SignUp'
+import { SignIn } from './OnboardingComponents/compound/SignIn'
 
 const App = ()=>{
   return (
@@ -14,6 +15,7 @@ const App = ()=>{
       <Route path='/setup' component = {SetupOnboarding}/>
       <Route path='/onboarding-success' component={OnBoardingSuccess}/>
       <Route path='/signup' component={SignUp}/>
+      <Route path='/signin' component={SignIn}/>
     </Switch>
   );
 }

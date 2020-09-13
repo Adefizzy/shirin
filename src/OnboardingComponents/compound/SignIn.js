@@ -24,15 +24,15 @@ const layout = {
 
 
 
-export const  SignUp = (props) => {
+export const  SignIn = (props) => {
     const history = useHistory();
 
     useEffect(() => {
 
     }, [])
 
-    const gotoSignIn = () => {
-        history.push('signin');
+    const gotoSignUp = () => {
+        history.push('signup');
     }
 
     const onFinish = values => {
@@ -48,7 +48,7 @@ export const  SignUp = (props) => {
           <Col sm={{span: 24}} lg={{span: 10}}>
               <div style={{width: '60%', margin: '0 auto'}}>
             <StyleLogo src={Logo}/>
-            <HeaderText>Create new account</HeaderText>
+            <HeaderText>Login to your account</HeaderText>
             <Form
             layout="vertical"
             name="basic"
@@ -58,28 +58,6 @@ export const  SignUp = (props) => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             >
-            <Form.Item
-                label= {<StyledLabel>Your Full Name</StyledLabel>}
-                name="fullname"
-                rules={[
-                {
-                    message: 'Please input your full name!',
-                },
-                ]}
-            >
-                <StyledInput />
-            </Form.Item>
-            <Form.Item
-                label=  {<StyledLabel>Your workspace (recomended: company name)</StyledLabel>}
-                name="companyName"
-                rules={[
-                {
-                    message: 'Please input your company name!',
-                },
-                ]}
-            >
-                <StyledInput />
-            </Form.Item>
             <Form.Item
                 label= {<StyledLabel>Email</StyledLabel>}
                 name="email"
@@ -104,10 +82,10 @@ export const  SignUp = (props) => {
             >
                 <StyledPassword />
             </Form.Item>
-            <PrimaryButton text='SIGN UP'/>
+            <PrimaryButton text='SIGN IN'/>
             </Form>
-            <StyledFooterMessage>By clicking Sign Up, you agree to our <span>Terms, Data Policy</span> and <span>Cookie Policy.</span></StyledFooterMessage>
-            <StyledSwitchMessage>Already have account? <span onClick={gotoSignIn}>Sign In.</span></StyledSwitchMessage>
+            <StyledFooterMessage>Forgot password? <span>click here</span></StyledFooterMessage>
+            <StyledSwitchMessage>Don't have am account? <span onClick={gotoSignUp}>Sign Up.</span></StyledSwitchMessage>
             </div>
           </Col>
           <StyledSecondDiv lg={{span: 14}}>
