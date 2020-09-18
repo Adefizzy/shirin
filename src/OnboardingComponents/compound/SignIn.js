@@ -43,6 +43,10 @@ export const  SignIn = (props) => {
         console.log('Failed:', errorInfo);
       };
 
+      const handleSignIn = ()=> {
+        history.push('dashboard');
+      }
+
     return (
       <StyledRow>
           <Col sm={{span: 24}} lg={{span: 10}}>
@@ -82,7 +86,7 @@ export const  SignIn = (props) => {
             >
                 <StyledPassword />
             </Form.Item>
-            <PrimaryButton text='SIGN IN'/>
+            <PrimaryButton text='SIGN IN' onClick={handleSignIn}/>
             </Form>
             <StyledFooterMessage>Forgot password? <span>click here</span></StyledFooterMessage>
             <StyledSwitchMessage>Don't have am account? <span onClick={gotoSignUp}>Sign Up.</span></StyledSwitchMessage>

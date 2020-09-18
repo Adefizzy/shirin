@@ -4,8 +4,11 @@ import { Route, Switch } from 'react-router-dom';
 import {ModuleOnboarding} from './OnboardingComponents/compound/ModuleOnboarding';
 import { SetupOnboarding } from './OnboardingComponents/compound/SetupOnboarding';
 import { OnBoardingSuccess } from './OnboardingComponents/compound/onBoardingSuccess';
-import { SignUp } from './OnboardingComponents/compound/SignUp'
-import { SignIn } from './OnboardingComponents/compound/SignIn'
+import { SignUp } from './OnboardingComponents/compound/SignUp';
+import { SignIn } from './OnboardingComponents/compound/SignIn';
+import { SiderDemo } from './DashBoardComponents/dashboard';
+import {NewComponent} from './DashBoardComponents/testing';
+
 
 const App = ()=>{
   return (
@@ -16,6 +19,7 @@ const App = ()=>{
       <Route path='/onboarding-success' component={OnBoardingSuccess}/>
       <Route path='/signup' component={SignUp}/>
       <Route path='/signin' component={SignIn}/>
+      <Route path='/dashboard' component={SiderDemo}/>
     </Switch>
   );
 }

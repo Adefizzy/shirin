@@ -23,3 +23,18 @@ code {
 p{
   margin-bottom: 0px;
 }
+
+.ant-tabs-tab-btn:focus, .ant-tabs-tab-remove:focus, .ant-tabs-tab-btn:active, .ant-tabs-tab-remove:active{
+  color: #6236ff !important;
+  border-bottom-color: red !important;
+}
+
+.ant-tabs-tab:hover{
+  color: #6236ff !important;
+  border-bottom-color: red !important;
+}
+
+.bpSzDw .ant-tabs-nav::before:focus{
+  color: #6236ff !important;
+  border-bottom-color: red !important;
+}

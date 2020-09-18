@@ -31,6 +31,7 @@ const buttonStyle = styled.button`
 `
 
 const StyledButton = styled.button`
+    font-weight: bolder;
     font-size: 1.2vw;
     border: none;
     padding: 14px 0px;
