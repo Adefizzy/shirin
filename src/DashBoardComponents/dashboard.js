@@ -20,7 +20,11 @@ import {DashbaordIcon} from './../images/dashbordIcon';
 import Banner from './../images/banner.png';
 import { LineChartt } from './element/LineChart';
 import totalIncomeIcon from './../images/totalIncomIcon.png';
+import totalExpensesIcon from './../images/totalExpensesIcon.png';
+import totalRevenueIcon from './../images/totalRevenueIcon.png';
+import totalTransactionIcon from './../images/totalTransactionIcon.png'
 import {PrimaryButton} from '../GlobalComponents/atoms/primaryButton';
+import {PieChart} from './element/PieChart';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -109,22 +113,26 @@ const statistics = [
   {
     image: totalIncomeIcon,
     title: 'Total Income',
-    amount: 'N553,000,000'
+    amount: 'N553,000,000',
+    color: '#f3f0ff'
   },
   {
-    image: totalIncomeIcon,
+    image: totalExpensesIcon,
     title: 'Total Expenses',
-    amount: 'N34,029,000'
+    amount: 'N34,029,000',
+    color: '#fff5d8'
   },
   {
-    image: totalIncomeIcon,
-    title: 'Total Income',
-    amount: 'N553,000,000'
+    image: totalTransactionIcon,
+    title: 'Total Transaction',
+    amount: 'N553,000,000',
+    color: '#d0f2ff'
   },
   {
-    image: totalIncomeIcon,
-    title: 'Total Income',
-    amount: 'N33,000'
+    image: totalRevenueIcon,
+    title: 'Total Revenue',
+    amount: 'N33,000',
+    color: '#d6fff6'
   }
 ]
 
@@ -180,7 +188,7 @@ export  const SiderDemo =  (props) =>  {
 
 
   const statList = statistics.map((stat, index )=>{
-    return <StatComponent title={stat.title} amount={stat.amount} key={index}/>
+    return <StatComponent color={stat.color} icon={stat.image} title={stat.title} amount={stat.amount} key={index}/>
   } )
 
     return (
@@ -301,7 +309,7 @@ export  const SiderDemo =  (props) =>  {
               <StyledStatDiv>
                 {statList}
                 <div style={{height: '50px'}}></div>
-                <PrimaryButton text='+ Download Reports'/>
+                <PrimaryButton text='+ Download Reports'/>  
               </StyledStatDiv>
               <StyledBody>
                 <img style={{width: '100%'}} src={Banner}/>
@@ -315,7 +323,20 @@ export  const SiderDemo =  (props) =>  {
                   </StyledAnalyticHeader>
                   <LineChartt width={analyticWidth}/>
                 </StyledAnalyticDiv>
-                <StyledTableDiv>
+              </StyledBody>
+            </StyledContainer>
+            <StyledContainer style={{marginTop: '0px'}}>
+              <StyledStatDiv style={{paddingTop: '0px', marginTop: '22px'}}>
+              <StyledPieChartDiv>
+                  <StyledPieChartName>
+                    <h2>Employee Structure</h2>
+                    <p>All Times</p>
+                  </StyledPieChartName>
+                  <PieChart/>
+                </StyledPieChartDiv> 
+              </StyledStatDiv>
+              <StyledBody>
+              <StyledTableDiv>
                   <StyledTableName>
                       <h2>Transaction History</h2>
                       <FiMoreHorizontal/>
@@ -329,8 +350,9 @@ export  const SiderDemo =  (props) =>  {
                     <p>View All transactions</p>
                   </StyledAllTransactionDiv>
                 </StyledTableDiv>
-                
+
               </StyledBody>
+
             </StyledContainer>
           </Content>
         </Layout>
@@ -343,8 +365,8 @@ export  const SiderDemo =  (props) =>  {
 const StatComponent = (props) => {
   return (
     <StyledSingleStat>
-        <StyledSingleStatImageDiv>
-          <img style={{width: '50%'}} src={totalIncomeIcon}/>
+        <StyledSingleStatImageDiv style={{backgroundColor: props.color}}>
+          <img style={{width: '50%'}} src={props.icon}/>
         </StyledSingleStatImageDiv>
         <StyledStatFigure>
           <p>{props.title}</p>
@@ -501,11 +523,10 @@ const StyledContainer = styled.div`
   display: flex;
   width: 100%;
   margin-top: 40px;
-
 `
+
 const StyledStatDiv = styled.div`
   min-width: 20%;
-  min-height: 100vh;
   padding-top:61px;
 `
 
@@ -520,7 +541,6 @@ const StyledSingleStat = styled.div`
 
 const StyledBody = styled.div`
   min-width: 80%;
-  min-height: 100vh;
   padding-left: 31px;
 `
 
@@ -615,8 +635,8 @@ const StyledAllTransactionDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 30px;
-  padding-bottom: 15px;
+  padding-top: 15px;
+
 
   & p{
     font-size: 13px;
@@ -655,10 +675,36 @@ const StyledSingleStatImageDiv = styled.div`
    display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f3f0ff;
   border-radius: 11px;
   width: 48px;
   height: 48px;
   margin-right: 12px;
+`
 
+const StyledPieChartDiv = styled.div`
+  height: 480px;
+  min-height: 50vh;
+  border-radius: 7.2px;
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.04);
+  border: solid 0.8px #e8e6f1;
+  background-color: #feffff;
+  padding: 20px;
+`
+
+const StyledPieChartName = styled(StyledTableName)`
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+
+  & p{
+  font-size: 11.2px;
+  color: rgba(0, 0, 0, 0.5);
+  }
+
+  @media ${device.laptop}{
+    & p{
+      font-size: 0.8vw;
+    }
+  }
 `
