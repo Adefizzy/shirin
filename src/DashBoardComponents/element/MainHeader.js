@@ -28,7 +28,11 @@ export const MainHeader = (props) => {
           
         })
      
-        return () => window.removeEventListener()
+        return () => window.removeEventListener('load', () => {
+          if(window.innerWidth * 2.5/100 > 30){
+            setAvatarWidth(window.innerWidth * 2.5/100)
+           }
+        })
       }, [])
 
 

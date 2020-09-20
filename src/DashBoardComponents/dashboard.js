@@ -12,6 +12,7 @@ import {DashbaordIcon} from './../images/dashbordIcon';
 import {Dashboard} from './compound/Dashboard';
 import {MainHeader} from './element/MainHeader';
 import{Deal} from './compound/Deal';
+import {Products} from './compound/Products';
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -133,7 +134,7 @@ export  const SiderDemo =  (props) =>  {
         <Layout className="site-layout">
           <MainHeader/>
           <Content style={{ padding: '32px', backgroundColor: '#f7f7f7'}}>
-            <Deal/>
+            <Products/>
           </Content>
         </Layout>
       </Layout>

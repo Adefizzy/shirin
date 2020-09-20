@@ -7,7 +7,6 @@ import { OnBoardingSuccess } from './OnboardingComponents/compound/onBoardingSuc
 import { SignUp } from './OnboardingComponents/compound/SignUp';
 import { SignIn } from './OnboardingComponents/compound/SignIn';
 import { SiderDemo } from './DashBoardComponents/dashboard';
-import {NewComponent} from './DashBoardComponents/testing';
 
 
 const App = ()=>{
