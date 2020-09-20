@@ -38,3 +38,14 @@ p{
   color: #6236ff !important;
   border-bottom-color: red !important;
 }
+
+.ant-picker-input > input{
+  font-size: 16px !important;
+}
+
+
+@media screen and (min-width: 1024px){
+  .ant-picker-input > input{
+    font-size: 1.2vw !important;
+  }
+}

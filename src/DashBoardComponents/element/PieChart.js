@@ -8,14 +8,14 @@ import { ResponsivePie } from '@nivo/pie'
 
 const data = [
     {
-      "id": "php",
-      "label": "php",
+      "id": "Boys",
+      "label": "boys",
       "value": 63,
       "color": "hsl(253, 100%, 61%)"
     },
     {
-      "id": "elixir",
-      "label": "elixir",
+      "id": "Girls",
+      "label": "girls",
       "value": 8,
       "color": "hsl(44, 100%, 49%)"
     },
