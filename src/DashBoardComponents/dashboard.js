@@ -13,6 +13,7 @@ import {Dashboard} from './compound/Dashboard';
 import {MainHeader} from './element/MainHeader';
 import{Deal} from './compound/Deal';
 import {Products} from './compound/Products';
+import { Contacts } from './compound/Contacts';
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -134,7 +135,7 @@ export  const SiderDemo =  (props) =>  {
         <Layout className="site-layout">
           <MainHeader/>
           <Content style={{ padding: '32px', backgroundColor: '#f7f7f7'}}>
-            <Products/>
+            <Contacts/>
           </Content>
         </Layout>
       </Layout>
