@@ -16,7 +16,10 @@ import {Products} from './compound/Products';
 import { Contacts } from './compound/Contacts';
 import { Company } from './compound/Company';
 import { ActivityOwner } from './compound/ActivityOwner';
-
+import { ChartAccount } from './compound/ChartAccount';
+import { TrialBalance } from './compound/TrialBalance';
+import { ProfitAndLost } from './compound/ProfitAndLost';
+import { BalanceSheet } from './compound/BalanceSheet'
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -137,7 +140,7 @@ export  const SiderDemo =  (props) =>  {
         <Layout className="site-layout">
           <MainHeader/>
           <Content style={{ padding: '32px', backgroundColor: '#f7f7f7'}}>
-            <ActivityOwner/>
+            <BalanceSheet/>
           </Content>
         </Layout>
       </Layout>

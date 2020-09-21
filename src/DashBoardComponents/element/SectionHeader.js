@@ -6,7 +6,7 @@ import { primaryColor, mutedColor, deepPrimaryColor, device} from '../../GlobalA
 export const SectionHeader = (props) => {
     return (
         <StyledSectionName>
-            <h2>{props.sectionName}</h2>
+            <h2>{props.sectionName} <span>{props.companyName}</span></h2>
             <p>{props.sectionMessage} <span>{props.sectionDate}</span></p>
         </StyledSectionName>
     );
@@ -22,6 +22,9 @@ const StyledSectionName = styled.div`
     letter-spacing: 0.4px;
     color: #000000;
     margin-bottom: 0px;
+    & span{
+      color: ${primaryColor};
+    }
   }
 
   & p{
