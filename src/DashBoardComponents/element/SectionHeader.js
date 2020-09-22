@@ -6,7 +6,10 @@ import { primaryColor, mutedColor, deepPrimaryColor, device} from '../../GlobalA
 export const SectionHeader = (props) => {
     return (
         <StyledSectionName>
+          <div style={{display: 'flex', alignItems: 'flex-end'}}>
             <h2>{props.sectionName} <span>{props.companyName}</span></h2>
+            {props.children}
+          </div>
             <p>{props.sectionMessage} <span>{props.sectionDate}</span></p>
         </StyledSectionName>
     );
