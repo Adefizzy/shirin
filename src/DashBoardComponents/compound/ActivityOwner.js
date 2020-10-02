@@ -4,6 +4,7 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {ActivityOwnerTableRow} from '../element/ActivityOwnerTableRow';
 import {data} from '../atom/activityOwnerData';
+import { useHistory} from 'react-router-dom';
 
 const tableTitle = ['Name', 'Domain','Description','Address', 'Action'];    
 
@@ -13,6 +14,7 @@ export const ActivityOwner = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
   
 
     useEffect(() => {
@@ -36,6 +38,10 @@ export const ActivityOwner = (props) => {
         setStart(start);
     }
 
+    const addUser= () => {
+        history.push(`addActivityOwner`)
+    }
+
 
     return (
         <>
@@ -44,7 +50,7 @@ export const ActivityOwner = (props) => {
                 sectionMessage='As of'
                 sectionDate='27 June 2020'
             />
-            <ActionBar/>
+            <ActionBar onClick={addUser} sectionName='Add Activity Owner'/>
             <Table
                 tableRow={tableRow}
                 tableTitle={tableTitle}

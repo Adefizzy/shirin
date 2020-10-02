@@ -25,7 +25,7 @@ export const ActionBar = (props) => {
             <DefaultButton text='Filter' icon={<FiFilter/>}/>
             <DefaultButtonWhite text='Export' icon={<FiArrowUpRight/>}/>
         </Space>
-        <GreenButton  text='Add Deal' icon={<p style={{marginRight: '20px', marginBottom: '0px'}}>+</p>}/>
+        {props.sectionName && <GreenButton onClick={props.onClick} text={props.sectionName} icon={<p style={{marginRight: '20px', marginBottom: '0px'}}>+</p>}/>}
     </StyledActionBar>
     );
 };

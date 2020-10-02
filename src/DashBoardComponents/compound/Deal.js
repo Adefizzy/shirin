@@ -12,6 +12,7 @@ import {Table } from '../element/Table';
 import {data} from '../atom/dealData';
 import { ActionBar } from '../element/ActionBar';
 import {DealTableRow} from '../element/DealTableRow';
+import { useHistory} from 'react-router-dom';
 const dateFormat = 'MMM Do YY';
 
 const tableTitle = ['Deal Title', 'Client Name', 'Product', 'Deal Status', 'Contact/Leads', 'Es. Amount', 'Activity', 'Action'];
@@ -21,6 +22,9 @@ export const Deal = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
+
+   
   
 
     useEffect(() => {
@@ -44,6 +48,10 @@ export const Deal = (props) => {
         setStart(start);
     }
 
+    const addDeal = () => {
+        history.push(`addDeal`)
+    }
+
     return (
         <>
             <SectionHeader
@@ -51,7 +59,7 @@ export const Deal = (props) => {
                 sectionMessage='See your data visualization from'
                 sectionDate='27 Feb - 3 Apr'
             />
-            <ActionBar/>
+            <ActionBar sectionName='Add Deal' onClick={addDeal}/>
             <Table
                 tableRow={tableRow}
                 tableTitle={tableTitle}

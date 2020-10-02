@@ -4,6 +4,7 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {ContactsTableRow} from '../element/ContactsTableRow';
 import {data} from '../atom/contactsData';
+import { useHistory} from 'react-router-dom';
 
 const tableTitle = ['Name', 'Product Description','Phone Number', 'Action'];    
 
@@ -13,6 +14,7 @@ export const Contacts = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
   
 
     useEffect(() => {
@@ -36,6 +38,11 @@ export const Contacts = (props) => {
         setStart(start);
     }
 
+    const addContact = () => {
+        history.push(`addContact`)
+    }
+
+
 
     return (
         <>
@@ -44,7 +51,7 @@ export const Contacts = (props) => {
                 sectionMessage='As of'
                 sectionDate='27 June 2020'
             />
-            <ActionBar/>
+            <ActionBar sectionName='Add Contact' onClick={addContact}/>
             <Table
                 tableRow={tableRow}
                 tableTitle={tableTitle}

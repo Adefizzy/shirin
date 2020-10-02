@@ -4,6 +4,7 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {CompanyTableRow} from '../element/CompanyTableRow';
 import {data} from '../atom/companyData';
+import { useHistory} from 'react-router-dom';
 
 const tableTitle = ['Name', 'Domain','Description','Address', 'Action'];    
 
@@ -13,6 +14,7 @@ export const Company = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
   
 
     useEffect(() => {
@@ -36,6 +38,9 @@ export const Company = (props) => {
         setStart(start);
     }
 
+    const addCompany = () => {
+        history.push(`addCompany`)
+    }
 
     return (
         <>
@@ -44,7 +49,7 @@ export const Company = (props) => {
                 sectionMessage='As of'
                 sectionDate='27 June 2020'
             />
-            <ActionBar/>
+            <ActionBar onClick={addCompany} sectionName='Add Company'/>
             <Table
                 tableRow={tableRow}
                 tableTitle={tableTitle}

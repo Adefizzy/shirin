@@ -46,7 +46,7 @@ export const BalanceSheet = (props) => {
                 sectionDate='27 June 2020'
                 companyName = 'TechAdvance'
             />
-           <ActionBar/>
+           <ActionBar sectionName='Add Balance Sheet'/>
            <div style={{height: '30px'}}></div>
            <Bar>
             <SubBar

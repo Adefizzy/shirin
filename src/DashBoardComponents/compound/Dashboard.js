@@ -143,7 +143,10 @@ export const Dashboard = (props) => {
           setAnalyticWidth(analyticRef.current.getBoundingClientRect().width);
         })
       
-        return () => window.removeEventListener()
+        return () => window.addEventListener('load', () => {
+          setAnalyticWidth(analyticRef.current.getBoundingClientRect().width);
+        })
+      
        }, [])
       
        useEffect(() => {
@@ -151,7 +154,9 @@ export const Dashboard = (props) => {
           setAnalyticWidth(analyticRef.current.getBoundingClientRect().width);       
         })
       
-        return () => window.removeEventListener()
+        return () => window.addEventListener('resize', () => {
+          setAnalyticWidth(analyticRef.current.getBoundingClientRect().width);       
+        })
       }, [])
       
        useEffect(() => {
@@ -162,7 +167,12 @@ export const Dashboard = (props) => {
            
          })
       
-         return () => window.removeEventListener()
+         return () => window.addEventListener('load', () => {
+          if(window.innerWidth * 2.5/100 > 30){
+           setAvatarWidth(window.innerWidth * 2.5/100)
+          }
+          
+        })
        }, [])
         const handleMouseEnter = () => {
           setHover(true);

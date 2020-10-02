@@ -43,6 +43,15 @@ p{
   font-size: 16px !important;
 }
 
+.ant-picker{
+  border-radius: 6px !important;
+}
+
+
+.ant-menu-dark .ant-menu-inline.ant-menu-sub{
+  background-color: #081341 !important;
+}
+
 
 @media screen and (min-width: 1024px){
   .ant-picker-input > input{

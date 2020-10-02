@@ -8,7 +8,7 @@ import { TiAttachment } from 'react-icons/ti';
 import { FiCheck, FiPaperclip, FiClock} from 'react-icons/fi';
 import { primaryColor, mutedColor, deepPrimaryColor, device} from '../../GlobalAccets';
 import {SingleTask} from './../element/SingleTask';
-
+import { useHistory} from 'react-router-dom';
 
 
 const selectValues = ['All Project', 'A Value', 'Others Values', 'Some other Values']
@@ -110,6 +110,7 @@ const completed = [
 export const Task = (props) => {
     const [selectedValue, setSellectedValue] = useState('All Project');
     const [showDropDown, setShowDropDown] = useState(false);
+    const history = useHistory();
 
 
 
@@ -151,6 +152,10 @@ export const Task = (props) => {
         return <SingleTask key={index} task={task}/>
     })
 
+    const addTask = () => {
+        history.push('addTask');
+    }
+
     return (
         <>
              <SectionHeader
@@ -167,7 +172,7 @@ export const Task = (props) => {
                         </StyledSelect>
                     </StyledShowProjectDiv>
                 </SectionHeader>
-            <ActionBar/>
+            <ActionBar sectionName='Add Task' onClick={addTask}/>
             <StyledTaskComponent>
                 <StyledTaskList>
                     <StyledTaskHeader>
@@ -189,7 +194,7 @@ export const Task = (props) => {
                     <div style={{overflow: 'auto', maxHeight: '70vh'}}>
                     {waitingTasks}
                     </div>
-                    <StyledTaskListFooter>
+                    <StyledTaskListFooter onClick={addTask}>
                         <MdAdd/>
                     </StyledTaskListFooter>
                 </StyledTaskList>
@@ -201,7 +206,7 @@ export const Task = (props) => {
                     <div style={{overflow: 'auto', maxHeight: '70vh'}}>
                     {completedTasks}
                     </div>
-                    <StyledTaskListFooter>
+                    <StyledTaskListFooter onClick={addTask}>
                         <MdAdd/>
                     </StyledTaskListFooter>
                 </StyledTaskList>
@@ -210,7 +215,7 @@ export const Task = (props) => {
                         <h6>Not Started</h6>
                         <MdMoreHoriz/>
                     </StyledTaskHeader>
-                    <StyledTaskListFooter>
+                    <StyledTaskListFooter onClick={addTask}>
                         <MdAdd/>
                     </StyledTaskListFooter>
                 </StyledTaskList>

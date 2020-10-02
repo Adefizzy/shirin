@@ -8,6 +8,7 @@ import companyDetailImage from '../../images/companyDetailImage.png';
 import {Row, Col, Typography} from 'antd';
 import { ProgressStageScaffold } from './../atom/ProgressStage';
 import {useHistory} from 'react-router-dom';
+import { BackButton } from './../../GlobalComponents/atoms/backButton';
 
 const { Title, Paragraph } = Typography;
 
@@ -25,10 +26,11 @@ export const  OnboardingScaffold = (props) => {
                 <Row>
                     <Col lg={{span: 18, offset: 3}} sm={{span: 20, offset: 2}}>
                     <div style={{minHeight: '16vh', marginTop: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'}}>
-                    <BackNavigator>
+                    {/* <BackNavigator>
                         <StyledFiChevronLeft/>
                         <p onClick={onBackClick}>Back</p>
-                    </BackNavigator>
+                    </BackNavigator> */}
+                    <BackButton/>
                     <StyleLogo src={Logo}/>
                          <HeaderText>{props.headerText}</HeaderText>
                     </div>

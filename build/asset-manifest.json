@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3623cc72.chunk.css",
+    "main.js": "/static/js/main.5ea08d00.chunk.js",
+    "main.js.map": "/static/js/main.5ea08d00.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5aee8ee6.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5aee8ee6.js.map",
+    "static/css/2.8a59418a.chunk.css": "/static/css/2.8a59418a.chunk.css",
+    "static/js/2.10cb904b.chunk.js": "/static/js/2.10cb904b.chunk.js",
+    "static/js/2.10cb904b.chunk.js.map": "/static/js/2.10cb904b.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.dac9afe6b261a3b2cf480a9cb982849e.js": "/precache-manifest.dac9afe6b261a3b2cf480a9cb982849e.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.8a59418a.chunk.css.map": "/static/css/2.8a59418a.chunk.css.map",
+    "static/css/main.3623cc72.chunk.css.map": "/static/css/main.3623cc72.chunk.css.map",
+    "static/js/2.10cb904b.chunk.js.LICENSE.txt": "/static/js/2.10cb904b.chunk.js.LICENSE.txt",
+    "static/media/banner.png": "/static/media/banner.ae5bc64a.png",
+    "static/media/companyDetailImage.png": "/static/media/companyDetailImage.a154a73c.png",
+    "static/media/finance-module.png": "/static/media/finance-module.4d09ddb1.png",
+    "static/media/index.css": "/static/media/gelion.9d5ce131.woff",
+    "static/media/logo_w.png": "/static/media/logo_w.16e33934.png",
+    "static/media/module.png": "/static/media/module.be4c2e6b.png",
+    "static/media/onBoarding2.png": "/static/media/onBoarding2.a5db0cf1.png",
+    "static/media/setup.png": "/static/media/setup.0422f028.png",
+    "static/media/successImage.png": "/static/media/successImage.c59785d9.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5aee8ee6.js",
+    "static/css/2.8a59418a.chunk.css",
+    "static/js/2.10cb904b.chunk.js",
+    "static/css/main.3623cc72.chunk.css",
+    "static/js/main.5ea08d00.chunk.js"
+  ]
+}

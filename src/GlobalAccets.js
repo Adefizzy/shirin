@@ -1,6 +1,8 @@
 export const primaryColor = '#6236ff';
 export const mutedColor = 'rgba(0, 0, 0, 0.5)';
 export const deepPrimaryColor = '#242f57';
+export const greenColor =  '#05bf70';
+export const redColor = '#e02020';
 
 const size = {
     mobileS: '320px',

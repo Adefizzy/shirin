@@ -16,7 +16,7 @@ export const CompanyDetailsOnboarding = (props) => {
     const history = useHistory();
 
     const handleSubmit = () => {
-        console.log('IM HERE', `${path}module-onboard`);
+
         history.push(`module-onboard`)
     }
     return (

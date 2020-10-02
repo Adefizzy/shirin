@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { mutedColor,  device} from '../../GlobalAccets';
+import { mutedColor,  device, greenColor} from '../../GlobalAccets';
 
 export const  SecondaryButton = (props)=>  {
     return (
@@ -41,7 +41,7 @@ export const StyledGreenButton = styled.button`
     border: none;
     border-radius: 4px;
     min-width: 127px;
-    background-color: #05bf70;
+    background-color: ${greenColor};
     padding: 5px 10px; 
     color: #fff;
     font-weight: bold;
