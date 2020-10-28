@@ -4,7 +4,9 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {CompanyTableRow} from '../element/CompanyTableRow';
 import {data} from '../atom/companyData';
-import { useHistory} from 'react-router-dom';
+import { useHistory,  Route, Switch, useRouteMatch} from 'react-router-dom';
+import { DeleteModal } from '../element/DeleteModal';
+import { EditCompany } from './EditCompany';
 
 const tableTitle = ['Name', 'Domain','Description','Address', 'Action'];    
 
@@ -15,6 +17,9 @@ export const Company = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
     const history = useHistory();
+    const {path, url} = useRouteMatch();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
   
 
     useEffect(() => {
@@ -24,8 +29,24 @@ export const Company = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const addCompany = () => {
+        history.push(`addCompany`)
+    }
+
+
+    const editCompany = () => {
+        history.push(`${url}/editCompany`)
+    }
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    } 
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <CompanyTableRow data={element} key={index}/>
+        return <CompanyTableRow onEdit={editCompany} handleDelete={handleDeletePayroll} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -38,27 +59,36 @@ export const Company = (props) => {
         setStart(start);
     }
 
-    const addCompany = () => {
-        history.push(`addCompany`)
-    }
+   
 
     return (
         <>
-             <SectionHeader
-                sectionName='Company'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar onClick={addCompany} sectionName='Add Company'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+            <Switch>
+                <Route exact path={path}>
+                <SectionHeader
+                    sectionName='Company'
+                    sectionMessage='As of'
+                    sectionDate='27 June 2020'
+                />
+                <ActionBar onClick={addCompany} sectionName='Add Company'/>
+                <Table
+                    tableRow={tableRow}
+                    tableTitle={tableTitle}
+                    data={data}
+                    handlPaginationChange={handlPaginationChange}
+                    start={start}
+                    currentPage={currentPage}
+                    pageSize={pageSize}
+                />
+                <DeleteModal
+                    deleteModalVisible={deleteModalVisible}
+                    onDeleteModalCancel={onDeleteModalCancel}
+                />
+                </Route> 
+                <Route path={`${path}/editCompany`}>
+                    <EditCompany/>
+                </Route>   
+             </Switch>
         </>
     );
 };

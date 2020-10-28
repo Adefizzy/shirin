@@ -15,7 +15,6 @@ export const ModuleTypeScaffold = (props) => {
                 <p>{props.moduleDescription}</p>
             </ModuleBody>
             <CustomCheckBox active={props.active}/>
-               
         </ModuleType>
     );
 };

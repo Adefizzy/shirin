@@ -12,7 +12,13 @@ import {Table } from '../element/Table';
 import {data} from '../atom/dealData';
 import { ActionBar } from '../element/ActionBar';
 import {DealTableRow} from '../element/DealTableRow';
-import { useHistory} from 'react-router-dom';
+import { useHistory, Route, Switch, useRouteMatch} from 'react-router-dom';
+import { AddActivityOwner } from './AddUser';
+import { AddNewActivity } from './AddNewActivity';
+import {AddNewLead } from './AddNewLead';
+import { Activities } from './activities';
+import { DeleteModal } from '../element/DeleteModal';
+import { EditDeal } from './EditDeal';
 const dateFormat = 'MMM Do YY';
 
 const tableTitle = ['Deal Title', 'Client Name', 'Product', 'Deal Status', 'Contact/Leads', 'Es. Amount', 'Activity', 'Action'];
@@ -23,7 +29,8 @@ export const Deal = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
     const history = useHistory();
-
+    const {path, url} = useRouteMatch();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
    
   
 
@@ -34,8 +41,51 @@ export const Deal = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const onAddNewActivity = () => {
+        history.push(`${url}/addNewActivity`);
+    }
+
+    const onAddNewLead = () => {
+        history.push(`${url}/addNewLead`);
+    }
+
+    const onGotoActivities = () => {
+        history.push(`${url}/activities`);
+    }
+
+    const onViewContacts = () => {
+        history.push('contacts')
+    }
+
+
+    const addDeal = () => {
+        history.push(`addDeal`)
+    }
+
+    const editDeal = () => {
+        history.push(`${path}/editDeal`)
+    }
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    }   
+
+
     const tableRow = currentData?.map((element, index) => {
-        return <DealTableRow data={element} key={index}/>
+        return <DealTableRow  
+            addNewLead={onAddNewLead} 
+            gotoActivities={onGotoActivities}
+            addNewActivity={onAddNewActivity} 
+            data={element} 
+            key={index}
+            onEdit={editDeal}
+            viewContacts={onViewContacts}
+            deleteEntry = {handleDeletePayroll}
+        />
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -48,26 +98,43 @@ export const Deal = (props) => {
         setStart(start);
     }
 
-    const addDeal = () => {
-        history.push(`addDeal`)
-    }
 
     return (
         <>
-            <SectionHeader
-                sectionName='Deals'
-                sectionMessage='See your data visualization from'
-                sectionDate='27 Feb - 3 Apr'
-            />
-            <ActionBar sectionName='Add Deal' onClick={addDeal}/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
+             <Switch>
+                 <Route exact path={path}>
+                    <SectionHeader
+                        sectionName='Deals'
+                        sectionMessage='See your data visualization from'
+                        sectionDate='27 Feb - 3 Apr'
+                    />
+                    <ActionBar sectionName='Add Deal' onClick={addDeal}/>
+                    <Table
+                        tableRow={tableRow}
+                        tableTitle={tableTitle}
+                        data={data}
+                        handlPaginationChange={handlPaginationChange}
+                        start={start}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                    />
+                </Route>
+                <Route path={`${path}/addNewActivity`}>
+                    <AddNewActivity/>
+                </Route>
+                <Route path={`${path}/addNewLead`}>
+                    <AddNewLead/>
+                </Route>
+                <Route path={`${path}/activities`}>
+                    <Activities/>
+                </Route>
+                <Route path={`${path}/editDeal`}>
+                    <EditDeal/>
+                </Route>
+            </Switch>
+            <DeleteModal
+                  deleteModalVisible={deleteModalVisible}
+                  onDeleteModalCancel={onDeleteModalCancel}
             />
         </>
     );

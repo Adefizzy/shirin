@@ -4,6 +4,9 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {EmployeeBonusTableRow} from '../element/EmployeeBonusTableRow';
 import {data} from '../atom/employeeBonusData';
+import { useHistory,  Route, Switch, useRouteMatch} from 'react-router-dom';
+import { AddEmployeeBonus } from './AddEmployeeBonus';
+import { DeleteModal } from '../element/DeleteModal';
 
 const tableTitle = ['Employee Name','Amount','Description', 'Month','Year', 'Action']
 
@@ -13,6 +16,10 @@ export const EmployeeBonus = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const {path, url} = useRouteMatch();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
+    const history = useHistory();
   
 
     useEffect(() => {
@@ -22,8 +29,17 @@ export const EmployeeBonus = (props) => {
         setCurrentPage(1);
     }, [])
 
+
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    } 
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <EmployeeBonusTableRow data={element} key={index}/>
+        return <EmployeeBonusTableRow handleDelete={handleDeletePayroll} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -36,24 +52,39 @@ export const EmployeeBonus = (props) => {
         setStart(start);
     }
 
+    const onAddBonus = () => {
+        history.push(`${path}/addbonus`)
+    }
+
 
     return (
         <>
-             <SectionHeader
-                sectionName='Employee Bonus'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar sectionName='Add Employee Bonus'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+             <Switch>
+                <Route exact path={path}>
+                    <SectionHeader
+                        sectionName='Employee Bonus'
+                        sectionMessage='As of'
+                        sectionDate='27 June 2020'
+                    />
+                    <ActionBar onClick={onAddBonus} sectionName='Add Employee Bonus'/>
+                    <Table
+                        tableRow={tableRow}
+                        tableTitle={tableTitle}
+                        data={data}
+                        handlPaginationChange={handlPaginationChange}
+                        start={start}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                    />
+                    <DeleteModal
+                        deleteModalVisible={deleteModalVisible}
+                        onDeleteModalCancel={onDeleteModalCancel}
+                    />
+                </Route>
+                <Route path={`${path}/addbonus`}>
+                    <AddEmployeeBonus/>
+                </Route>
+            </Switch>
         </>
     );
 };

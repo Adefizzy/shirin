@@ -185,16 +185,17 @@ export const SetupOnboarding = (props) => {
 
 
 const StyledTabs = styled(Tabs)`
+    margin-top: 30px;
 
-&.ant-tabs-tab-btn:focus, .ant-tabs-tab-remove:focus, .ant-tabs-tab-btn:active, .ant-tabs-tab-remove:active{
-    color: ${primaryColor} !important;
-    border-bottom-color: red;
-}
+    &.ant-tabs-tab-btn:focus, .ant-tabs-tab-remove:focus, .ant-tabs-tab-btn:active, .ant-tabs-tab-remove:active{
+        color: ${primaryColor} !important;
+        border-bottom-color: red;
+    }
 
-&.ant-tabs-tab:hover{
-    color: ${primaryColor} !important;
-    border-bottom-color: red;
-}
+    &.ant-tabs-tab:hover{
+        color: ${primaryColor} !important;
+        border-bottom-color: red;
+    }
   
 
     & .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {

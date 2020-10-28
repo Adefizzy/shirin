@@ -14,7 +14,7 @@ export const BankAccountTableRow = (props) => {
             <td>{props.data.accountCode}</td>
             <td>{props.data.currentBalnce}</td>
             <td>{props.data.dateAdded}</td>
-            <td><a href='#'>Edit</a></td>  
+            <td><a onClick={props.onEdit} style={{color: 'blue'}}>Edit</a></td>  
         </TableRow>
     );
 };

@@ -1,10 +1,6 @@
-import React, {useEffect, useState, useRef} from 'react';
-import { Layout, Menu, Breadcrumb, Input, Avatar, Badge, Button, Tag, Table} from 'antd';
-import { primaryColor, mutedColor, deepPrimaryColor, device} from './../GlobalAccets';
-import {
-  FileOutlined,
-  TeamOutlined,
-} from '@ant-design/icons';
+import React, {useEffect, useState} from 'react';
+import { Layout, Menu, Input} from 'antd';
+import { mutedColor, device} from './../GlobalAccets';
 import Logo from  '../images/Logo-real.png';
 import { AiOutlineSearch } from "react-icons/ai";
 import styled from 'styled-components';
@@ -84,17 +80,21 @@ import { AddWorkDay } from './compound/AddWorkDay';
 import { AddLeaveType } from './compound/AddLeaveType';
 import { AddOfficeLocation } from './compound/AddOfficeLocation';
 import { AddSubsidiary } from './compound/AddSubsidiary';
+import { EmployeeData } from './compound/EmployeeData';
+import { StatutoryDeduction } from './compound/StatutoryDeduction';
+import { PayrollBreakDown } from './compound/PayrollBreakDown';
+import { TaxRate } from './compound/TaxRate';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 
-export  const SiderDemo =  (props) =>  {
+export  const SiderDemo =  () =>  {
   const [hover, setHover] = useState(1);
   const [selectedNav, setSelectedNav] = useState(1);
   const [sideBarWith, setSideBarWidth] = useState(230);
   const [selectedSubMenu, setSelectedSubMenu] = useState('');
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
 
 
   
@@ -214,15 +214,15 @@ export  const SiderDemo =  (props) =>  {
               <StyledSubMenuItem clicked={selectedNav == "24"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="24"><StyledLink to={`${path}/payslip`}>Payslip</StyledLink></StyledSubMenuItem>
             </StyledSubMenu>
             <StyledSubMenu onMouseDown = {() => onSelectSubMenu("sub5")}   key="sub5" clicked={selectedNav == "sub5"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} icon={<ReportIcon click={selectedSubMenu == "sub5"} hover={hover == "sub5" }/>}  title="Reports">
-              <StyledSubMenuItem clicked={selectedNav == "25"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="25">Employee Data</StyledSubMenuItem>
+              <StyledSubMenuItem clicked={selectedNav == "25"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="25"><StyledLink to={`${path}/employeeData`}>Employee Data</StyledLink></StyledSubMenuItem>
               <StyledSubMenuItem clicked={selectedNav == "26"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="26"><StyledLink to={`${path}/taxReport`}>Tax Report</StyledLink></StyledSubMenuItem>
               <StyledSubMenuItem clicked={selectedNav == "27"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="27"><StyledLink to={`${path}/pensionReport`}>Single Employee Pension Report</StyledLink></StyledSubMenuItem>
               <StyledSubMenuItem clicked={selectedNav == "28"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="28"><StyledLink to={`${path}/employeePensionReport`}>Employee Pension Report</StyledLink></StyledSubMenuItem>
               <StyledSubMenuItem clicked={selectedNav == "29"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="29"><StyledLink to={`${path}/nhfReport`}>NHF Report</StyledLink></StyledSubMenuItem>
             </StyledSubMenu>
             <StyledSubMenu onMouseDown = {() => onSelectSubMenu("sub6")}  key="sub6" clicked={selectedNav == "sub6"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} icon={<SettingIcon click={selectedSubMenu == "sub6"} hover={hover == "sub6" }/>}  title="Settings">
-              <StyledSubMenuItem clicked={selectedNav == "30"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="30">Statutory Deductions</StyledSubMenuItem>
-              <StyledSubMenuItem clicked={selectedNav == "31"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="31">Payroll Breakdown</StyledSubMenuItem>
+              <StyledSubMenuItem clicked={selectedNav == "30"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="30"><StyledLink to={`${path}/statutoryDeduction`}>Statutory Deductions</StyledLink></StyledSubMenuItem>
+              <StyledSubMenuItem clicked={selectedNav == "31"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="31"><StyledLink to={`${path}/payrollBreakDown`}>Payroll Breakdown</StyledLink></StyledSubMenuItem>
             </StyledSubMenu>
             <hr style={{borderTop: '2px solid #28315A', marginRight: `${sideBarWith * 20/100}px`}}/>
             <StyledModuleTitle>FINANCE</StyledModuleTitle>
@@ -250,7 +250,7 @@ export  const SiderDemo =  (props) =>  {
               <StyledSubMenuItem clicked={selectedNav == "44"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="44"><StyledLink  to={`${path}/balancesheet`}>Balance Sheet</StyledLink></StyledSubMenuItem>
             </StyledSubMenu>
             <StyledSubMenu onMouseDown = {() => onSelectSubMenu("sub12")}  key="sub12" clicked={selectedNav == "sub12"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} icon={<SettingIcon click={selectedSubMenu == "sub12"} hover={hover == "sub12" }/>}  title="Settings">
-              <StyledSubMenuItem clicked={selectedNav == "45"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="45">Tax Rates</StyledSubMenuItem>
+              <StyledSubMenuItem clicked={selectedNav == "45"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} key="45"><StyledLink  to={`${path}/taxRate`}>Tax Rates</StyledLink></StyledSubMenuItem>
             </StyledSubMenu>
           </Menu>
         </Sider>
@@ -423,6 +423,19 @@ export  const SiderDemo =  (props) =>  {
               <Route path={`${path}/nhfReport`}>
                 <NHFReport/>
               </Route>
+              <Route path={`${path}/employeeData`}>
+                <EmployeeData/>
+              </Route>
+              <Route path={`${path}/statutoryDeduction`}>
+                <StatutoryDeduction/>
+              </Route>
+              <Route path={`${path}/payrollBreakDown`}>
+                <PayrollBreakDown/>
+              </Route>
+              <Route path={`${path}/taxRate`}>
+                <TaxRate/>
+              </Route>
+              
             </Switch>
             
           </Content>
@@ -483,69 +496,9 @@ const StyledMenuItem = styled(Menu.Item)`
   }
 `
 
-const StyledMenuIcon = styled.img`
- width: 24px;
- margin-right: 4px;
- @media ${device.laptop}{
-        width: 1.5vw;
-    }
-`
 
-const StyledHeader = styled(Header)`
-  padding: 0;
-  background-color: #fff;
-  display: flex;
-  justify-content: flex-end;
-  padding-left: 10px;
-`
 
-const StyledUserSummary = styled.div`
-  display: flex;
-  place-items: center;
-  padding-left: 18px;
-  padding-right: 33px;
-  border-left: 1px solid #e7e8f2;
 
-  & div{
-    display: flex;
-    flex-direction: column;
-    margin-left: 12px;
-    margin-right: 20px;
-
-    & h6{
-      font-size: 14px;
-    }
-
-    & p{
-      margin-bottom: 0px;
-      line-height: normal;
-      color: ${mutedColor};
-      font-size: 12px;
-    }
-  }
-
-  @media ${device.laptop}{
-    & div{
-    
-    & h6{
-      font-size: 0.9vw;
-      line-height: normal;
-      margin-bottom: 0px;
-    }
-
-    &p{
-      font-size: 0.7vw;
-    }
-
-  }
-  }
-`
-
-const StyledAlertDiv = styled.div`
-  padding-right: 24px;
-  padding-left: 24px;
-  border-left: 1px solid #e7e8f2;
-`
 
 const StyledSubMenu = styled(SubMenu)`
  background-color: ${props => props.clicked? '#263059 !important' :'#081341'};

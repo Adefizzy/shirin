@@ -3,9 +3,20 @@ import {SectionHeader} from '../element/SectionHeader';
 import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {EmployeeInfoTableRow} from '../element/employeeInfoTableRow';
-import {data} from '../atom/employeeInfoData';
+import { useHistory, useRouteMatch, Route, Switch} from 'react-router-dom';
+import { ViewEmployeeInfo } from './ViewEmployeeInfo';
 
-const tableTitle = ['Employee ID','Full Name','Designation', 'Subsidiary','Joining Date','Action', 'Invite Staff']
+const data = [
+    {
+        employeeId: '7990500',
+        fullName: '	Tope Odun',
+        designation: 'Executive',
+        subsidiary: 'Tolu Ent',
+        joiningDate: 'Mar 31, 2020'
+    }
+]
+
+const tableTitle = ['Employee ID','Full Name','Designation', 'Subsidiary','Joining Date','Action']
 
 export const ExitedEmployee = (props) => {
 
@@ -13,6 +24,8 @@ export const ExitedEmployee = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
+    const {path, url} = useRouteMatch();
   
 
     useEffect(() => {
@@ -22,8 +35,12 @@ export const ExitedEmployee = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const onViewEmployeeInfo = () => {
+        history.push(`${path}/viewEmployeeInfo`)
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <EmployeeInfoTableRow data={element} key={index}/>
+        return <EmployeeInfoTableRow view={onViewEmployeeInfo}  showView={true} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -39,6 +56,10 @@ export const ExitedEmployee = (props) => {
 
     return (
         <>
+            <Switch>
+                <Route exact path={path}>
+
+        
              <SectionHeader
                 sectionName='Exited Employee'
                 sectionMessage='As of'
@@ -54,6 +75,11 @@ export const ExitedEmployee = (props) => {
                 currentPage={currentPage}
                 pageSize={pageSize}
             />
+              </Route>
+            <Route path={`${path}/viewEmployeeInfo`}>
+                    <ViewEmployeeInfo/>
+            </Route>
+        </Switch>
         </>
     );
 };

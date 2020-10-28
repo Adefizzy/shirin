@@ -8,46 +8,7 @@ export const TableRow = (props) => {
     return (
         <StyledTableRow>
             {props.children}
-        {/* <td>{props.data.dealTitle}</td>
-        <td>{props.data.clientName}</td>
-        <td>{props.data.product}</td>
-        <td>
-            <StyledStatus inidicatorColor={statusColors.inidicatorColor} backgroundColor={statusColors.backgroundColor} color={statusColors.color}>
-                <div>
-                </div>
-                 {props.data.status}
-            </StyledStatus>
-        </td>
-        <td>
-            <div style={{display: 'flex'}}>
-                <a style={{color: '#0091ff', marginRight: '5px'}}>View</a>
-                |
-                <div style={{backgroundColor: '#e8fcf4',marginLeft: '5px', color: '#05bf70', paddingLeft: '2px',  paddingRight: '3px'}}>
-                    + Add
-                </div>
-            </div>
-        </td>
-        <td>{props.data.estAmount}</td>
-        <td>
-            <div style={{display: 'flex'}}>
-                <a style={{color: '#0091ff', marginRight: '5px'}}>View</a>
-                |
-                <div style={{backgroundColor: '#e8fcf4',marginLeft: '5px', color: '#05bf70', paddingLeft: '2px',  paddingRight: '3px'}}>
-                    + Add
-                </div>
-            </div>
-        </td>
-        <td>
-            <div style={{border: 'solid 0.6px #d5d5d5',minWidth: '84px', maxWidth: '84px',  borderRadius: '3px', display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
-                <div style={{ flexBasis: '50%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
-                    <FiEdit/>
-                </div>
-                <div style={{color: '#ef3826', borderLeft: 'solid 0.6px #d5d5d5', flexBasis: '50%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
-                    <FiTrash2/>
-                </div>
-            </div>
-        </td> */}
-    </StyledTableRow>
+        </StyledTableRow>
     );
 };
 

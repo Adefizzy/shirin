@@ -32,7 +32,7 @@ const buttonStyle = styled.button`
 
 const StyledButton = styled.button`
     font-weight: bolder;
-    font-size: 1.2vw;
+    font-size: 16px;
     border: none;
     padding: 14px 0px;
     border-radius: 6px;
@@ -41,6 +41,10 @@ const StyledButton = styled.button`
     min-width: 100%;
     &:focus{
         outline: none;
+    }
+
+    @media ${device.laptop}{
+        font-size: 1.3vw;
     }
 `
 const StyledButtonWhite = styled.button`

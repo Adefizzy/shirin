@@ -16,7 +16,7 @@ export const ClientTableRow = (props) => {
             <td>{props.data.country}</td>
             <td>{props.data.description}</td>
             <td>{props.data.dateAdded}</td>
-            <td><a href='#'>Edit</a></td>  
+            <td><p onClick={props.onEdit} style={{color: 'blue', cursor: 'pointer', margin: '0px'}}>Edit</p></td>  
         </TableRow>
     );
 };

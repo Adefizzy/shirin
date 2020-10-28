@@ -4,6 +4,10 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {EmployeeLeaveTableRow} from '../element/EmployeeLeaveTableRow';
 import {data} from '../atom/employeeLeaveData';
+import { DeleteModal } from '../element/DeleteModal';
+import { useHistory, useRouteMatch, Route, Switch} from 'react-router-dom';
+import { AddLeaveRequest } from './AddLeaveResquest';
+import { EditLeaveRequest } from './EditLeaveRequest';
 
 const tableTitle = ['Employee','Leave Type','Start Date', 'End Date','No. of Days','Description','Status', 'Action']
 
@@ -13,6 +17,9 @@ export const EmployeeLeave = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
+    const {path, url} = useRouteMatch();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   
 
     useEffect(() => {
@@ -22,8 +29,20 @@ export const EmployeeLeave = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    } 
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
+   const onEditLeaveRequest= () => {
+        history.push(`${path}/editLeaveRequest`);
+   }
+
     const tableRow = currentData?.map((element, index) => {
-        return <EmployeeLeaveTableRow data={element} key={index}/>
+        return <EmployeeLeaveTableRow onEdit={onEditLeaveRequest}  handleDelete={handleDeletePayroll} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -36,24 +55,42 @@ export const EmployeeLeave = (props) => {
         setStart(start);
     }
 
+    const addLeaveRequest = () => {
+        history.push(`${path}/addLeaveRequest`);
+    }
+
 
     return (
         <>
-             <SectionHeader
-                sectionName='Employee Leave'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar sectionName='Add Leave Request'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+            <Switch>
+                <Route exact path={path}>
+                    <SectionHeader
+                        sectionName='Employee Leave'
+                        sectionMessage='As of'
+                        sectionDate='27 June 2020'
+                    />
+                    <ActionBar onClick={addLeaveRequest} sectionName='Add Leave Request'/>
+                    <Table
+                        tableRow={tableRow}
+                        tableTitle={tableTitle}
+                        data={data}
+                        handlPaginationChange={handlPaginationChange}
+                        start={start}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                    />
+                    <DeleteModal
+                        deleteModalVisible={deleteModalVisible}
+                        onDeleteModalCancel={onDeleteModalCancel}
+                    />
+                </Route>
+                <Route path={`${path}/addLeaveRequest`}>
+                    <AddLeaveRequest/>
+                </Route>
+                <Route path={`${path}/editLeaveRequest`}>
+                    <EditLeaveRequest/>
+                </Route>
+            </Switch>
         </>
     );
 };

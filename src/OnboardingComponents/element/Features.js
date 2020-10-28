@@ -22,6 +22,10 @@ export const FeaturesScaffold = (props) => {
 const Features = styled.div`
     min-width: 100%;
     margin-top: 40px;
+
+    &:first-child{
+        margin-top: 10px;
+    }
 `
 const FeaturesHeader = styled.div`
     display: flex;

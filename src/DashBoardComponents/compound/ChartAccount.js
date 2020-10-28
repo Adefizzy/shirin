@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { primaryColor, mutedColor, deepPrimaryColor, device} from '../../GlobalAccets';
 import {AccountBar} from '../element/AccountBar';
 import {ChartAccountBar} from './../atom/ChartAccountBar';
+import { useHistory, useRouteMatch, Route, Switch} from 'react-router-dom';
+import { AddChartAccount } from './AddChartAccount';
 
 
 const revenue = {
@@ -16,28 +18,41 @@ const revenue = {
 }
 
 export const ChartAccount = (props) => {
+    const history = useHistory();
+    const {path, url} = useRouteMatch();
 
     const bars = revenue.details.map((detail, index) => {
         return <ChartAccountBar code={detail.code} name={detail.name} key={index}/>
     })
 
+    const onAddAccount = () => {
+        history.push(`${url}/addChartAccount`);
+    }
+
     return (
         <>
-             <SectionHeader
-                sectionName='Chart of Account'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-           <StyledButtonDiv>
-           <GreenButton  text='Add Account' icon={<p style={{marginRight: '20px', marginBottom: '0px'}}>+</p>}/>
-           </StyledButtonDiv>
-           <StyledTitleDiv>
-               <p>Chart of Account as at Jun 27, 2020</p>
-           </StyledTitleDiv>
-           <AccountBar
-            title={revenue.title}
-            bars={bars}
-           />
+             <Switch>
+                <Route exact path={path}>
+                    <SectionHeader
+                        sectionName='Chart of Account'
+                        sectionMessage='As of'
+                        sectionDate='27 June 2020'
+                        />
+                    <StyledButtonDiv>
+                    <GreenButton   onClick={onAddAccount}  text='Add Account' icon={<p style={{marginRight: '20px', marginBottom: '0px'}}>+</p>}/>
+                    </StyledButtonDiv>
+                    <StyledTitleDiv>
+                        <p>Chart of Account as at Jun 27, 2020</p>
+                    </StyledTitleDiv>
+                    <AccountBar
+                        title={revenue.title}
+                        bars={bars}
+                    />
+                </Route>
+                <Route path={`${path}/addChartAccount`}>
+                    <AddChartAccount/>
+                </Route>
+           </Switch>
         </>
     );
 };

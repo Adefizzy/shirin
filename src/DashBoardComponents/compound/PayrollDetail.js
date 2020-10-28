@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { primaryColor, mutedColor, redColor, device, greenColor} from '../../GlobalAccets';
 import { Modal } from 'antd';
 import confirmIcon from '../../images/confirm.png';
+import { DeleteModal } from '../element/DeleteModal';
 
 
 const tableTitle = ['Employee', 'Gross Salary (₦)','Overtime (Hours)','Days worked', 'Deductions (₦)', 'Net pay (₦)', 'Breakdown'];    
@@ -47,7 +48,7 @@ export const PayrollDetail = (props) => {
     const [start, setStart] = useState(1);
     const [ confirmModalVisible, setConfirmModalVisible] = useState(false);
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-    const [modalWidth, setModalWidth] = useState(200);
+    const [modalWidth, setModalWidth] = useState(500);
 
 
 
@@ -55,7 +56,7 @@ export const PayrollDetail = (props) => {
         window.addEventListener('load', () => {
             setModalWidth(window.innerWidth * (30/100));
         })
-    })
+    }, [])
     
 
 
@@ -158,8 +159,11 @@ export const PayrollDetail = (props) => {
                     </StyledButton>
                 </StyledConfirmModalBody>
             </StyledModal>
-
-            <StyledModal
+            <DeleteModal 
+                deleteModalVisible={deleteModalVisible}
+                onDeleteModalCancel={onDeleteModalCancel}
+            />
+           {/*  <StyledModal
                 title="Basic Modal"
                 visible={deleteModalVisible}
                 onCancel={onDeleteModalCancel}
@@ -176,7 +180,7 @@ export const PayrollDetail = (props) => {
                      <StyledConfirmDeleteButton> Delete </StyledConfirmDeleteButton>
                  </StyledDeleteModalButtonDiv>
                 </StyledDeleteModalBody>
-            </StyledModal>
+            </StyledModal> */}
         </>
     );
 };

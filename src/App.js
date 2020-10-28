@@ -7,7 +7,10 @@ import { OnBoardingSuccess } from './OnboardingComponents/compound/onBoardingSuc
 import { SignUp } from './OnboardingComponents/compound/SignUp';
 import { SignIn } from './OnboardingComponents/compound/SignIn';
 import { SiderDemo } from './DashBoardComponents/dashboard';
-
+import {InviteEmail} from './otherPages/InviteEmail';
+import { SignUpEmail } from './otherPages/SignUpEmail';
+import { PricingPage } from './otherPages/PricingPage';
+import { PricePage } from './otherPages/PricePage';
 
 const App = ()=>{
   return (
@@ -19,6 +22,9 @@ const App = ()=>{
       <Route path='/signup' component={SignUp}/>
       <Route path='/signin' component={SignIn}/>
       <Route path='/dashboard' component={SiderDemo}/>
+      <Route path='/inviteemail' component={InviteEmail}/>
+      <Route path='/signupemail' component={SignUpEmail}/> 
+      <Route path='/pricingPage' component={PricePage}/>  
     </Switch>
   );
 }

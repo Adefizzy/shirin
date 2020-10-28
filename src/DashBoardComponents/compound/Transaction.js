@@ -2,10 +2,18 @@ import React, {useState, useEffect} from 'react';
 import {SectionHeader} from '../element/SectionHeader';
 import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
-import {JournalPostingTableRow} from '../element/JournalPostingTableRow';
-import {data} from '../atom/journalPostingData';
+import {TransactionTableRow} from '../element/TransactionTableRow';
+import { useHistory, useRouteMatch, Route, Switch} from 'react-router-dom';
 
-const tableTitle = ['Date','From Account','To Account', 'Amount', 'Description']
+const tableTitle = ['Date','Account','Narrative', 'Amount']
+const data = [
+    {
+        date: 'Apr 01, 2018',
+        account: 'Salary',
+        narrative: 'Received journal posting of 50,000 from Salary',
+        amount: '40,000.00'
+    }
+]
 
 export const Transaction = (props) => {
 
@@ -13,6 +21,8 @@ export const Transaction = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
+    const {path, url} = useRouteMatch();
   
 
     useEffect(() => {
@@ -23,7 +33,7 @@ export const Transaction = (props) => {
     }, [])
 
     const tableRow = currentData?.map((element, index) => {
-        return <JournalPostingTableRow data={element} key={index}/>
+        return <TransactionTableRow data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -39,6 +49,8 @@ export const Transaction = (props) => {
 
     return (
         <>
+              <Switch>
+                <Route exact path={path}>
              <SectionHeader
                 sectionName='Transactions'
                 sectionMessage='As of'
@@ -54,6 +66,8 @@ export const Transaction = (props) => {
                 currentPage={currentPage}
                 pageSize={pageSize}
             />
+            </Route>
+            </Switch>
         </>
     );
 };

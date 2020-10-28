@@ -4,6 +4,9 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {BankAccountTableRow} from '../element/BankAccountTableRow';
 import {data} from '../atom/bankAccountData';
+import { useHistory, useRouteMatch, Route, Switch} from 'react-router-dom';
+import { AddBank } from './AddBank';
+import { EditBank } from './EditBank';
 
 const tableTitle = ['S/N','Bank Name','Account Number', 'Account Code', 'Current Balnce', 'Date Added', 'Action']
 
@@ -13,6 +16,8 @@ export const BankAccount = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
+    const {path, url} = useRouteMatch();
   
 
     useEffect(() => {
@@ -22,8 +27,12 @@ export const BankAccount = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const onEditBank = () => {
+        history.push(`${url}/editBank`);
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <BankAccountTableRow data={element} key={index}/>
+        return <BankAccountTableRow onEdit={onEditBank} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -37,23 +46,38 @@ export const BankAccount = (props) => {
     }
 
 
+    const onAddBank = () => {
+        history.push(`${url}/addBank`)
+    }
+
+
     return (
         <>
-             <SectionHeader
-                sectionName='Banking'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar sectionName= 'Add Bank'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+             <Switch>
+                <Route exact path={path}>
+                    <SectionHeader
+                        sectionName='Banking'
+                        sectionMessage='As of'
+                        sectionDate='27 June 2020'
+                    />
+                    <ActionBar onClick={onAddBank} sectionName= 'Add Bank'/>
+                    <Table
+                        tableRow={tableRow}
+                        tableTitle={tableTitle}
+                        data={data}
+                        handlPaginationChange={handlPaginationChange}
+                        start={start}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                    />
+                </Route>
+                <Route path={`${path}/addBank`}>
+                    <AddBank/>
+                </Route>
+                <Route path={`${path}/editBank`}>
+                    <EditBank/>
+                </Route>
+            </Switch>
         </>
     );
 };

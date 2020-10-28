@@ -4,6 +4,8 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {JournalPostingTableRow} from '../element/JournalPostingTableRow';
 import {data} from '../atom/journalPostingData';
+import { useHistory, useRouteMatch, Route, Switch} from 'react-router-dom';
+import { AddJournal } from './AddJournal';
 
 const tableTitle = ['Date','From Account','To Account', 'Amount', 'Description']
 
@@ -13,6 +15,8 @@ export const JournalPosting = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
+    const {path, url} = useRouteMatch();
   
 
     useEffect(() => {
@@ -36,24 +40,36 @@ export const JournalPosting = (props) => {
         setStart(start);
     }
 
+    const onAddJournal = () => {
+        history.push(`${url}/addJournal`);
+    }
+
 
     return (
         <>
-             <SectionHeader
-                sectionName='Journal Postings'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar sectionName= 'Add Journal'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+            <Switch>
+                <Route exact path={path}>
+        
+                    <SectionHeader
+                        sectionName='Journal Postings'
+                        sectionMessage='As of'
+                        sectionDate='27 June 2020'
+                    />
+                    <ActionBar onClick={onAddJournal} sectionName= 'Add Journal'/>
+                    <Table
+                        tableRow={tableRow}
+                        tableTitle={tableTitle}
+                        data={data}
+                        handlPaginationChange={handlPaginationChange}
+                        start={start}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                    />  
+                </Route>
+                <Route path={`${path}/addJournal`}>
+                    <AddJournal/>
+                </Route>
+           </Switch>
         </>
     );
 };

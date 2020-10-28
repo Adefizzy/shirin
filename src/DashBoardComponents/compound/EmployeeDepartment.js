@@ -4,7 +4,10 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {EmployeeDepartmentTableRow} from '../element/EmployeeDepartmentTableRow';
 import {data} from '../atom/employeeDeptData';
-import { useHistory} from 'react-router-dom';
+import { useHistory, Route, Switch, useRouteMatch} from 'react-router-dom';
+import { DeleteModal } from '../element/DeleteModal';
+import { EditDepartment } from './EditDept';
+
 
 const tableTitle = ['Code', 'Department', 'Head of Department','Parent Company','Subsidiary','Action']
 
@@ -15,6 +18,8 @@ export const EmployeeDepartment = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
     const history = useHistory();
+    const {path, url} = useRouteMatch();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   
 
     useEffect(() => {
@@ -24,8 +29,20 @@ export const EmployeeDepartment = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    } 
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
+    const onEditDept = () => {
+        history.push(`${url}/editDept`)
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <EmployeeDepartmentTableRow data={element} key={index}/>
+        return <EmployeeDepartmentTableRow handleDelete={handleDeletePayroll} onEdit={onEditDept} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -44,21 +61,32 @@ export const EmployeeDepartment = (props) => {
 
     return (
         <>
-             <SectionHeader
-                sectionName='Employee Department'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar onClick={addDept} sectionName='Add Department'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+            <Switch>
+                <Route exact path={path}>
+                    <SectionHeader
+                        sectionName='Employee Department'
+                        sectionMessage='As of'
+                        sectionDate='27 June 2020'
+                    />
+                    <ActionBar onClick={addDept} sectionName='Add Department'/>
+                    <Table
+                        tableRow={tableRow}
+                        tableTitle={tableTitle}
+                        data={data}
+                        handlPaginationChange={handlPaginationChange}
+                        start={start}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                    />
+                    <DeleteModal
+                            deleteModalVisible={deleteModalVisible}
+                            onDeleteModalCancel={onDeleteModalCancel}
+                    />
+                </Route>
+                <Route path={`${path}/editDept`}>
+                    <EditDepartment/>
+                </Route>
+            </Switch>
         </>
     );
 };

@@ -2,10 +2,15 @@ import React, {useState, useEffect} from 'react';
 import {SectionHeader} from '../element/SectionHeader';
 import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
-import {ClientTableRow} from '../element/ClientTableRow';
-import {data} from '../atom/clientsData';
+import { BillTableRow } from '../element/BillTableRow';
+import {Switch, Route, useRouteMatch, useHistory} from 'react-router-dom';
+import { AddBill } from './AddBill';
 
-const tableTitle = ['S/N','Client Name','Phone', 'Address', 'State', 'Country','Description','Date Added','Action']
+
+const tableTitle = ['S/N','Vendor','Issued', 'Amount', 'Due', 'Balance','Status','Action']
+const data = [
+    
+]
 
 export const Bill = (props) => {
 
@@ -13,6 +18,8 @@ export const Bill = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
+    const {path, url} = useRouteMatch();
   
 
     useEffect(() => {
@@ -23,7 +30,7 @@ export const Bill = (props) => {
     }, [])
 
     const tableRow = currentData?.map((element, index) => {
-        return <ClientTableRow data={element} key={index}/>
+        return <BillTableRow data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -37,23 +44,35 @@ export const Bill = (props) => {
     }
 
 
+    const onAddBill = () => {
+        history.push(`${url}/addBill`)
+    }
+
+
     return (
         <>
-             <SectionHeader
-                sectionName='Bill'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar sectionName= 'Add New Bill'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+             <Switch>
+                <Route exact path={path}>
+                    <SectionHeader
+                        sectionName='Bill'
+                        sectionMessage='As of'
+                        sectionDate='27 June 2020'
+                    />
+                    <ActionBar onClick={onAddBill} sectionName= 'Add New Bill'/>
+                    <Table
+                        tableRow={tableRow}
+                        tableTitle={tableTitle}
+                        data={data}
+                        handlPaginationChange={handlPaginationChange}
+                        start={start}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                    />
+                </Route>
+                <Route path={`${path}/addBill`}>
+                    <AddBill/>
+                </Route>
+            </Switch>
         </>
     );
 };

@@ -4,7 +4,9 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {EmployeeGradeTableRow} from '../element/EmployeeGradeTableRow';
 import {data} from '../atom/employeeGradeData';
-import { useHistory} from 'react-router-dom';
+import { useHistory, Route, Switch, useRouteMatch} from 'react-router-dom';
+import { DeleteModal } from '../element/DeleteModal';
+import { EditGrade } from './EditGrade';
 
 const tableTitle = ['S/N','Name','Code', 'Description', 'Action']
 
@@ -15,6 +17,8 @@ export const EmployeeGrade = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
     const history = useHistory();
+    const {url, path} = useRouteMatch();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
     useEffect(() => {
         let extractedData = data.slice(0, 11);
@@ -23,8 +27,20 @@ export const EmployeeGrade = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    } 
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
+    const editGrade = () => {
+        history.push(`${url}/editGrade`)
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <EmployeeGradeTableRow data={element} key={index}/>
+        return <EmployeeGradeTableRow handleDelete={handleDeletePayroll} onEdit={editGrade} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -44,21 +60,32 @@ export const EmployeeGrade = (props) => {
 
     return (
         <>
-             <SectionHeader
-                sectionName='Employee Grade'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar onClick={addGrade} sectionName='Add Grade'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+            <Switch>
+                <Route exact path={path}>
+                <SectionHeader
+                    sectionName='Employee Grade'
+                    sectionMessage='As of'
+                    sectionDate='27 June 2020'
+                />
+                <ActionBar onClick={addGrade} sectionName='Add Grade'/>
+                <Table
+                    tableRow={tableRow}
+                    tableTitle={tableTitle}
+                    data={data}
+                    handlPaginationChange={handlPaginationChange}
+                    start={start}
+                    currentPage={currentPage}
+                    pageSize={pageSize}
+                />
+                 <DeleteModal
+                    deleteModalVisible={deleteModalVisible}
+                    onDeleteModalCancel={onDeleteModalCancel}
+                />
+                </Route>
+                <Route path={`${path}/editGrade`}>
+                    <EditGrade/>
+                </Route>
+            </Switch>
         </>
     );
 };

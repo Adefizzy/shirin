@@ -27,6 +27,7 @@ export const CompanyDetailsOnboarding = (props) => {
             bodyMessage='Now that you have created an account, input your company information to be able to choose your modules (CRM, Finance & HR)'
             image = {companyDetailImage}
             imageWidth='100%'
+            noBackButton={true}
             childComponent={
                 <Col  lg={{span: 18, offset: 3}} sm={{span: 20, offset: 2}}>
                     <InputDiv>

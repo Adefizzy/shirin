@@ -5,7 +5,7 @@ import {Table} from '../element/Table';
 import {WorkDaysTableRow} from '../element/WorkdaysTableRow';
 import {data} from '../atom/workdaysData';
 import { useHistory} from 'react-router-dom';
-
+import { DeleteModal } from '../element/DeleteModal';
 
 const tableTitle = ['Month', 'Year', 'Work Days','Action']
 
@@ -16,6 +16,7 @@ export const WorkDays = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
     const history = useHistory();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   
 
     useEffect(() => {
@@ -25,8 +26,16 @@ export const WorkDays = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    } 
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <WorkDaysTableRow data={element} key={index}/>
+        return <WorkDaysTableRow handleDelete={handleDeletePayroll}  data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -59,6 +68,10 @@ export const WorkDays = (props) => {
                 start={start}
                 currentPage={currentPage}
                 pageSize={pageSize}
+            />
+            <DeleteModal
+                deleteModalVisible={deleteModalVisible}
+                onDeleteModalCancel={onDeleteModalCancel}
             />
         </>
     );

@@ -15,7 +15,7 @@ export const EmployeeRemunerationTableRow = (props) => {
                 <a href='#'>BreakDown</a>
             </td>  
             <td>
-                <div style={{border: 'solid 0.6px #d5d5d5',minWidth: '84px', maxWidth: '84px',  borderRadius: '3px', display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
+                <div onClick={props.onEdit} style={{border: 'solid 0.6px #d5d5d5',minWidth: '84px', maxWidth: '84px',  borderRadius: '3px', display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
                     <div style={{ flexBasis: '100%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
                         <FiEdit/>
                     </div>

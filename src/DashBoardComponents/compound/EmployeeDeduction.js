@@ -2,10 +2,21 @@ import React, {useState, useEffect} from 'react';
 import {SectionHeader} from '../element/SectionHeader';
 import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
-import {EmployeeBonusTableRow} from '../element/EmployeeBonusTableRow';
-import {data} from '../atom/employeeBonusData';
+import {EmployeeDeductionTableRow} from '../element/EmployeeDeductionTableRow';
+import { DeleteModal } from '../element/DeleteModal';
+import { useHistory,  Route, Switch, useRouteMatch} from 'react-router-dom';
+import { AddDeduction } from './AddDeduction';
 
-const tableTitle = ['Employee Name','Amount','Description', 'Month','Year', 'Action']
+
+const tableTitle = ['Name','Deduction Type','Description', 'Amount','Month', 'Year', 'Action']
+const data = [{
+    name: 'Tope Odun',
+    deductionType: 'Loan',
+    description: 'this is the description of the loan.',
+    amount: '₦3,000.00',
+    month: 'March',
+    year: '2017'
+}]
 
 export const EmployeeDeduction = (props) => {
 
@@ -13,6 +24,10 @@ export const EmployeeDeduction = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const {path, url} = useRouteMatch();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
+    const history = useHistory();
   
 
     useEffect(() => {
@@ -22,8 +37,16 @@ export const EmployeeDeduction = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    } 
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <EmployeeBonusTableRow data={element} key={index}/>
+        return <EmployeeDeductionTableRow handleDelete={handleDeletePayroll} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -37,14 +60,19 @@ export const EmployeeDeduction = (props) => {
     }
 
 
+    const onDeduction = () => {
+        history.push(`${path}/addDeduction`)
+    }
     return (
         <>
+            <Switch>
+            <Route exact path={path}>
              <SectionHeader
                 sectionName='Employee Deduction'
                 sectionMessage='As of'
                 sectionDate='27 June 2020'
             />
-            <ActionBar sectionName='Add Employee Deduction'/>
+            <ActionBar onClick={onDeduction} sectionName='Add Employee Deduction'/>
             <Table
                 tableRow={tableRow}
                 tableTitle={tableTitle}
@@ -54,6 +82,15 @@ export const EmployeeDeduction = (props) => {
                 currentPage={currentPage}
                 pageSize={pageSize}
             />
+            <DeleteModal
+                deleteModalVisible={deleteModalVisible}
+                onDeleteModalCancel={onDeleteModalCancel}
+            />
+            </Route>
+            <Route path={`${path}/addDeduction`}>
+                <AddDeduction/>
+            </Route>
+         </Switch>
         </>
     );
 };

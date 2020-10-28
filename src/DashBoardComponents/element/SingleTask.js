@@ -1,16 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
-import {SectionHeader} from '../element/SectionHeader';
-import {ActionBar} from '../element/ActionBar';
 import {  Progress, Avatar } from 'antd';
-import {MdArrowDropDown, MdMoreHoriz} from 'react-icons/md';
-import { TiAttachment } from 'react-icons/ti';
 import { FiCheck, FiPaperclip, FiClock} from 'react-icons/fi';
-import { primaryColor, mutedColor, deepPrimaryColor, device} from '../../GlobalAccets';
+import { device} from '../../GlobalAccets';
+import {useTaskContext} from '../../context/taskContext';
 
 export const SingleTask = (props) => {
     const [daysLeftBackground, setDaysLeftBackground] = useState('');
     const [daysLeftColor, setDaysLeftColor] = useState('');
+    const taskRef = useRef();
+    const {setTaskRefState} = useTaskContext();
+
+
+    useEffect(() => {
+        setTaskRefState(taskRef);
+    }, [])
 
 
     useEffect(() => {
@@ -31,7 +35,15 @@ export const SingleTask = (props) => {
 
 
     return (
-        <StyledTask>
+        <StyledTask 
+            ref={taskRef} 
+            onDragOver={props.onDragOver} 
+            onDragLeave={props.onDragLeave} 
+            style={{marginTop: `${props.task.marginTop}px`}} 
+            data-id={props.id} 
+            draggable={true} 
+            onDragStart={props.onDragStart}
+        >
             <p style={{textDecoration: props.task.status === 'completed'? 'line-through': 'none'}}>{props.task.title}</p>
             <p>{props.task.team} Team</p>
             <StyledTaskTagRow>
@@ -80,6 +92,7 @@ const StyledTask = styled.div`
         letter-spacing: 0.1px;
         color: #696974;
     }
+
 
     @media ${device.laptop}{
        & p{

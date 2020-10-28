@@ -2,10 +2,25 @@ import React, {useState, useEffect} from 'react';
 import {SectionHeader} from '../element/SectionHeader';
 import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
-import {ClientTableRow} from '../element/ClientTableRow';
-import {data} from '../atom/clientsData';
+import {VendorTableRow} from '../element/VendorTableRow';
+import {Switch, Route, useRouteMatch, useHistory} from 'react-router-dom';
+import { AddVendor } from './AddVendor';
+import { EditVendor } from './EditVendor';
 
-const tableTitle = ['S/N','Client Name','Phone', 'Address', 'State', 'Country','Description','Date Added','Action']
+
+const tableTitle = ['S/N','Name','Email', 'Phone','TIN', 'Address', 'State', 'Country','Action']
+
+const data = [{
+    sn: '1',
+    name: 'Akeem Ajayi',
+    email: 'akeem@techadvance.ng',
+    phone: '0909999334989',
+    tin: '298728988',
+    address: '21c Adewale Way Ikeja Lagostg',
+    state: 'Adamawa',
+    country: 'Nigeria',
+    action: ''
+}]
 
 export const Vendor = (props) => {
 
@@ -13,6 +28,8 @@ export const Vendor = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
+    const {path, url} = useRouteMatch();
   
 
     useEffect(() => {
@@ -22,8 +39,13 @@ export const Vendor = (props) => {
         setCurrentPage(1);
     }, [])
 
+
+    const onEditVendor = () => {
+        history.push(`${url}/editVendor`)
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <ClientTableRow data={element} key={index}/>
+        return <VendorTableRow onEdit={onEditVendor} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -36,15 +58,21 @@ export const Vendor = (props) => {
         setStart(start);
     }
 
+    const onAddVendor = () => {
+        history.push(`${url}/addVendor`);
+    }
+
 
     return (
         <>
+            <Switch>
+                <Route exact path={path}>
              <SectionHeader
                 sectionName='Vendor'
                 sectionMessage='As of'
                 sectionDate='27 June 2020'
             />
-            <ActionBar sectionName= 'Add New Vendor'/>
+            <ActionBar onClick={onAddVendor} sectionName= 'Add New Vendor'/>
             <Table
                 tableRow={tableRow}
                 tableTitle={tableTitle}
@@ -54,6 +82,14 @@ export const Vendor = (props) => {
                 currentPage={currentPage}
                 pageSize={pageSize}
             />
+            </Route>
+            <Route path={`${path}/addVendor`}>
+                <AddVendor/>
+            </Route>
+            <Route path={`${path}/editVendor`}>
+                <EditVendor/>
+            </Route>
+            </Switch>
         </>
     );
 };

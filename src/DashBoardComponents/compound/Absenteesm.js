@@ -2,10 +2,22 @@ import React, {useState, useEffect} from 'react';
 import {SectionHeader} from '../element/SectionHeader';
 import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
-import {EmployeeInfoTableRow} from '../element/employeeInfoTableRow';
-import {data} from '../atom/employeeInfoData';
+import {AbsentTableRow} from '../element/AbsentTableRow';
+import { DeleteModal } from '../element/DeleteModal';
+import { useHistory,  Route, Switch, useRouteMatch} from 'react-router-dom';
+import { AddAbsent } from './AddAbsentiseem';
+import { EditAbsent } from './EditAbsent';
 
-const tableTitle = ['Employee ID','Full Name','Designation', 'Subsidiary','Joining Date','Action', 'Invite Staff']
+
+const tableTitle = ['Employee Name','Days Absent','Month', 'Year','Date','Actions'];
+const data = [{
+    name: 'Tope Odun',
+    daysAbsent: 3,
+    month: 'May',
+    year:'2016',
+    date: 'Aug 21, 2019',
+    actions: ''
+}]
 
 export const Absenteesm = (props) => {
 
@@ -13,6 +25,9 @@ export const Absenteesm = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const {path, url} = useRouteMatch();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+    const history = useHistory();
   
 
     useEffect(() => {
@@ -22,8 +37,20 @@ export const Absenteesm = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    } 
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
+    const onEditAbsent = () => {
+        history.push(`${url}/editAbsent`);
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <EmployeeInfoTableRow data={element} key={index}/>
+        return <AbsentTableRow onEdit={onEditAbsent} handleDelete={handleDeletePayroll} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -36,24 +63,41 @@ export const Absenteesm = (props) => {
         setStart(start);
     }
 
+    const onAddAbsent = () => {
+        history.push(`${url}/addAbsent`);
+    }
 
     return (
         <>
-             <SectionHeader
-                sectionName='Employee Absence'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar sectionName = 'Add Employee Absence'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+             <Switch>
+                <Route exact path={path}>
+                    <SectionHeader
+                        sectionName='Employee Absence'
+                        sectionMessage='As of'
+                        sectionDate='27 June 2020'
+                    />
+                    <ActionBar onClick={onAddAbsent} sectionName = 'Add Employee Absence'/>
+                    <Table
+                        tableRow={tableRow}
+                        tableTitle={tableTitle}
+                        data={data}
+                        handlPaginationChange={handlPaginationChange}
+                        start={start}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                    />
+                    <DeleteModal
+                        deleteModalVisible={deleteModalVisible}
+                        onDeleteModalCancel={onDeleteModalCancel}
+                    />
+            </Route>
+            <Route path={`${path}/editAbsent`}>
+                <EditAbsent/>
+            </Route>
+            <Route path={`${path}/addAbsent`}>
+                <AddAbsent/>
+            </Route>
+          </Switch>
         </>
     );
 };

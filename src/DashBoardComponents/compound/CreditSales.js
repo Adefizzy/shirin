@@ -3,9 +3,13 @@ import {SectionHeader} from '../element/SectionHeader';
 import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {CashSalesTableRow} from '../element/CashSalesTableRow';
-import {data} from '../atom/cashSalesData';
+import {Switch, Route, useRouteMatch, useHistory} from 'react-router-dom';
+import { AddCreditSales } from './AddCreditSales';
 
-const tableTitle = ['S/N','Date','Amount', 'Client', 'Amount Category', 'Payment Method','Reference', 'Action']
+
+const tableTitle = ['S/N', 'Client', 'Amount', 'Due Date','Status', 'Action']
+
+const data = []
 
 export const CreditSales = (props) => {
 
@@ -13,6 +17,8 @@ export const CreditSales = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
+    const history = useHistory();
+    const {path, url} = useRouteMatch();
   
 
     useEffect(() => {
@@ -37,23 +43,33 @@ export const CreditSales = (props) => {
     }
 
 
+    const onAddCreditSales = () => {
+        history.push(`${url}/addCreditSales`);
+    }
     return (
         <>
-             <SectionHeader
-                sectionName='Credit Sales'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar sectionName= 'Add Credit Sales'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+            <Switch>
+                <Route exact path={path}>
+                    <SectionHeader
+                        sectionName='Credit Sales'
+                        sectionMessage='As of'
+                        sectionDate='27 June 2020'
+                    />
+                    <ActionBar onClick={onAddCreditSales} sectionName= 'Add Credit Sales'/>
+                    <Table
+                        tableRow={tableRow}
+                        tableTitle={tableTitle}
+                        data={data}
+                        handlPaginationChange={handlPaginationChange}
+                        start={start}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                    />
+                </Route>
+                <Route path={`${path}/addCreditSales`}>
+                    <AddCreditSales/>
+                </Route>
+            </Switch>
         </>
     );
 };

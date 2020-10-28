@@ -26,13 +26,9 @@ export const  OnboardingScaffold = (props) => {
                 <Row>
                     <Col lg={{span: 18, offset: 3}} sm={{span: 20, offset: 2}}>
                     <div style={{minHeight: '16vh', marginTop: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'}}>
-                    {/* <BackNavigator>
-                        <StyledFiChevronLeft/>
-                        <p onClick={onBackClick}>Back</p>
-                    </BackNavigator> */}
-                    <BackButton/>
-                    <StyleLogo src={Logo}/>
-                         <HeaderText>{props.headerText}</HeaderText>
+                    {!props.noBackButton && <BackButton/>}
+                        <StyleLogo src={Logo}/>
+                        <HeaderText>{props.headerText}</HeaderText>
                     </div>
                     </Col>
                     {props.childComponent}
@@ -118,6 +114,7 @@ const StyledFiChevronLeft = styled(FiChevronLeft)`
 const StyleLogo = styled.img`
     width: 8vw;
     margin-top: 35px;
+    margin-bottom: 15px;
 `
 
 const HeaderText = styled.h1`

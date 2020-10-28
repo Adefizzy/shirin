@@ -4,7 +4,9 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {LeaveTypeTableRow} from '../element/LeaveTypeTableRow';
 import {data} from '../atom/leaveTypeData';
-import { useHistory} from 'react-router-dom';
+import { useHistory,  Route, Switch, useRouteMatch} from 'react-router-dom';
+import { DeleteModal } from '../element/DeleteModal';
+import {EditLeaveType} from './EditLeaveType';
 
 const tableTitle = ['Leave Title','No. of Leave Days','Grade Level', 'Action']
 
@@ -15,6 +17,8 @@ export const LeaveType = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
     const history = useHistory();
+    const {path, url} = useRouteMatch();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   
 
     useEffect(() => {
@@ -24,8 +28,21 @@ export const LeaveType = (props) => {
         setCurrentPage(1);
     }, [])
 
+
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    } 
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
+    const onEditLeaveType = () => {
+        history.push(`${path}/editLeaveType`)
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <LeaveTypeTableRow data={element} key={index}/>
+        return <LeaveTypeTableRow handleDelete={handleDeletePayroll} onEdit={onEditLeaveType} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -44,21 +61,32 @@ export const LeaveType = (props) => {
 
     return (
         <>
-             <SectionHeader
-                sectionName='Leave Type'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar onClick={addLeaveType} sectionName='Add Leave Type'/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+            <Switch>
+                <Route exact path={path}>
+                    <SectionHeader
+                        sectionName='Leave Type'
+                        sectionMessage='As of'
+                        sectionDate='27 June 2020'
+                    />
+                    <ActionBar onClick={addLeaveType} sectionName='Add Leave Type'/>
+                    <Table
+                        tableRow={tableRow}
+                        tableTitle={tableTitle}
+                        data={data}
+                        handlPaginationChange={handlPaginationChange}
+                        start={start}
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                    />
+                    <DeleteModal
+                        deleteModalVisible={deleteModalVisible}
+                        onDeleteModalCancel={onDeleteModalCancel}
+                    />
+                </Route>
+                <Route path={`${path}/editLeaveType`}>
+                    <EditLeaveType/>
+                </Route>
+            </Switch>
         </>
     );
 };

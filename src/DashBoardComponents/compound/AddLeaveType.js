@@ -4,13 +4,9 @@ import {AddFormInputsScaffold} from '../element/addFormInputScaffold';
 
 
 const inpuTitle = [
-    {name: 'Task Title', type: 'input'},
-    {name: 'Type (Optional)', type: 'select'},
-    {name: 'Associated With Deal: (Optional)', type: 'select'},
-    {name: 'Type to search', type: 'input'},
-    {name: 'Assigned To: (Optional)', type: 'select'},
-    {name: 'Due Date : (Optional)', type: 'date'},
-    {name: 'Note', type: 'textarea'},
+    {name: 'Leave Title', type: 'input'},
+    {name: 'No. of Leave Days', type: 'select'},
+    {name: 'Grade Level', type: 'select'},
 ];
 
 export const AddLeaveType = () => <AddFormInputsScaffold inpuTitle={inpuTitle} title='Leave Type'/>

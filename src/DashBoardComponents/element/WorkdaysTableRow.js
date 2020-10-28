@@ -13,10 +13,10 @@ export const WorkDaysTableRow = (props) => {
             <td>{props.data.workdays}</td>
             <td>
                 <div style={{border: 'solid 0.6px #d5d5d5',minWidth: '84px', maxWidth: '84px',  borderRadius: '3px', display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
-                    <div style={{ flexBasis: '50%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
+                    {/* <div style={{ flexBasis: '50%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
                         <FiEdit/>
-                    </div>
-                    <div style={{color: '#ef3826', borderLeft: 'solid 0.6px #d5d5d5', flexBasis: '50%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
+                    </div> */}
+                    <div onClick={props.handleDelete} style={{color: '#ef3826', borderLeft: 'solid 0.6px #d5d5d5', flexBasis: '100%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
                         <FiTrash2/>
                     </div>
                 </div>

@@ -40,7 +40,7 @@ export const AddFormInputsScaffold = (props) => {
             />
             <StyledContainer>
                 <StyledHeader>
-                <h5>Add {props.title}</h5>
+                <h5>{props.isEdit? 'Edit' :'Add'} {props.descriptionTitle || props.title}</h5>
                 <p>Create the range of amounts that an employee is paid<br/> at a particular level in an organization or job</p>
                 </StyledHeader>
                 <hr/>

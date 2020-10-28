@@ -32,9 +32,9 @@ export const DealTableRow = (props) => {
             </td>
             <td>
                 <div style={{display: 'flex'}}>
-                    <a style={{color: '#0091ff', marginRight: '5px'}}>View</a>
+                    <a onClick={props.viewContacts} style={{cursor: 'pointer', color: '#0091ff', marginRight: '5px'}}>View</a>
                     |
-                    <div style={{backgroundColor: '#e8fcf4',marginLeft: '5px', color: '#05bf70', paddingLeft: '2px',  paddingRight: '3px'}}>
+                    <div onClick={props.addNewLead} style={{cursor: 'pointer', backgroundColor: '#e8fcf4',marginLeft: '5px', color: '#05bf70', paddingLeft: '2px',  paddingRight: '3px'}}>
                         + Add
                     </div>
                 </div>
@@ -42,19 +42,19 @@ export const DealTableRow = (props) => {
             <td>{props.data.estAmount}</td>
             <td>
                 <div style={{display: 'flex'}}>
-                    <a style={{color: '#0091ff', marginRight: '5px'}}>View</a>
+                    <a onClick={props.gotoActivities} style={{color: '#0091ff', marginRight: '5px'}}>View</a>
                     |
-                    <div style={{backgroundColor: '#e8fcf4',marginLeft: '5px', color: '#05bf70', paddingLeft: '2px',  paddingRight: '3px'}}>
+                    <div onClick={props.addNewActivity} style={{ cursor: 'pointer', backgroundColor: '#e8fcf4',marginLeft: '5px', color: '#05bf70', paddingLeft: '2px',  paddingRight: '3px'}}>
                         + Add
                     </div>
                 </div>
             </td>
             <td>
                 <div style={{border: 'solid 0.6px #d5d5d5',minWidth: '84px', maxWidth: '84px',  borderRadius: '3px', display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
-                    <div style={{ flexBasis: '50%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
+                    <div onClick={props.onEdit} style={{cursor: 'pointer', flexBasis: '50%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
                         <FiEdit/>
                     </div>
-                    <div style={{color: '#ef3826', borderLeft: 'solid 0.6px #d5d5d5', flexBasis: '50%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
+                    <div onClick={props.deleteEntry} style={{cursor: 'pointer', color: '#ef3826', borderLeft: 'solid 0.6px #d5d5d5', flexBasis: '50%', textAlign: "center", paddingTop: '4px',paddingBottom: '4px'}}>
                         <FiTrash2/>
                     </div>
                 </div>

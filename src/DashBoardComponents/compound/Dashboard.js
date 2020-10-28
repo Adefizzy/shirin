@@ -139,25 +139,29 @@ export const Dashboard = (props) => {
 
 
     useEffect(() => {
+      if(Object.entries(analyticRef).length !== 0){
         window.addEventListener('load', () => {
-          setAnalyticWidth(analyticRef.current.getBoundingClientRect().width);
+          setAnalyticWidth(analyticRef?.current?.getBoundingClientRect()?.width);
         })
       
         return () => window.addEventListener('load', () => {
-          setAnalyticWidth(analyticRef.current.getBoundingClientRect().width);
+          setAnalyticWidth(analyticRef?.current?.getBoundingClientRect()?.width);
         })
-      
+      }
        }, [])
       
        useEffect(() => {
-        window.addEventListener('resize', () => {
-          setAnalyticWidth(analyticRef.current.getBoundingClientRect().width);       
-        })
-      
-        return () => window.addEventListener('resize', () => {
-          setAnalyticWidth(analyticRef.current.getBoundingClientRect().width);       
-        })
-      }, [])
+         console.log(analyticRef.current);
+         if(analyticRef.current !== null){
+          window.addEventListener('resize', () => {
+            setAnalyticWidth(analyticRef?.current?.getBoundingClientRect()?.width);       
+          })
+        
+          return () => window.addEventListener('resize', () => {
+            setAnalyticWidth(analyticRef?.current?.getBoundingClientRect()?.width);       
+          })
+         }
+      }, [analyticRef])
       
        useEffect(() => {
          window.addEventListener('load', () => {

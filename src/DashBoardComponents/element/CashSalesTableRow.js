@@ -1,8 +1,5 @@
-import  React, {useEffect, useState} from 'react';
+import  React from 'react';
 import {TableRow} from '../atom/TableRow';
-import styled from 'styled-components';
-import { FiFilter, FiArrowUpRight, FiTrash2, FiEdit } from 'react-icons/fi';
-import { mutedColor,  device, primaryColor} from '../../GlobalAccets';
 
 export const CashSalesTableRow = (props) => {
     
@@ -15,7 +12,7 @@ export const CashSalesTableRow = (props) => {
             <td>{props.data.amountCategory}</td>
             <td>{props.data.paymentMethod}</td>
             <td>{props.data.reference}</td>
-            <td><a href='#'>Edit</a></td>  
+            <td><p onClick={props.onEdit} style={{color: 'blue', margin: '0px', cursor: 'pointer'}}>View</p></td>  
         </TableRow>
     );
 };

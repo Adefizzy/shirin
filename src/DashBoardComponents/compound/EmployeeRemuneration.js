@@ -4,6 +4,8 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {EmployeeRemunerationTableRow} from '../element/EmployeeRemunerationTableRow';
 import {data} from '../atom/employeeRemunerationData';
+import { useHistory,  Route, Switch, useRouteMatch} from 'react-router-dom';
+import { EditGross } from './EditGross';
 
 const tableTitle = ['Employee','Subsidiary','Gross Salary', 'Breakdown','Edit Gross Fee']
 
@@ -13,7 +15,9 @@ export const EmployeeRemuneration = (props) => {
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
-  
+    const {path, url} = useRouteMatch();
+
+    const history = useHistory();
 
     useEffect(() => {
         let extractedData = data.slice(0, 11);
@@ -22,8 +26,12 @@ export const EmployeeRemuneration = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const handleEdit = () => {
+        history.push(`${url}/editGross`)
+    }
+
     const tableRow = currentData?.map((element, index) => {
-        return <EmployeeRemunerationTableRow data={element} key={index}/>
+        return <EmployeeRemunerationTableRow onEdit={handleEdit} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -39,6 +47,8 @@ export const EmployeeRemuneration = (props) => {
 
     return (
         <>
+                  <Switch>
+                <Route exact path={path}>
              <SectionHeader
                 sectionName='Employee Remuneration'
                 sectionMessage='As of'
@@ -54,6 +64,11 @@ export const EmployeeRemuneration = (props) => {
                 currentPage={currentPage}
                 pageSize={pageSize}
             />
+            </Route>
+            <Route path={`${path}/editGross`}>
+                <EditGross/>
+            </Route>
+            </Switch>
         </>
     );
 };

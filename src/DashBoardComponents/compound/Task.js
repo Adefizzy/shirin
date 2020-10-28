@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {SectionHeader} from '../element/SectionHeader';
 import {ActionBar} from '../element/ActionBar';
@@ -9,6 +9,8 @@ import { FiCheck, FiPaperclip, FiClock} from 'react-icons/fi';
 import { primaryColor, mutedColor, deepPrimaryColor, device} from '../../GlobalAccets';
 import {SingleTask} from './../element/SingleTask';
 import { useHistory} from 'react-router-dom';
+import { TaskContext } from '../../context/taskContext';
+
 
 
 const selectValues = ['All Project', 'A Value', 'Others Values', 'Some other Values']
@@ -21,6 +23,8 @@ const InProgress = [
         taskScore: '4/5',
         percent: 50,
         daysLeft: 14,
+        marginTop: 0,
+        id: 'a'
     },
     {
         title: 'Illustration',
@@ -29,6 +33,8 @@ const InProgress = [
         taskScore: '7/8',
         percent: 80,
         daysLeft: 10,
+        marginTop: 0,
+        id: 'b'
     }, 
   
 ]
@@ -40,7 +46,9 @@ const waiting = [
         attached: 13,
         taskScore: '4/5',
         percent: 95,
+        marginTop: 0,
         daysLeft: 2,
+        id: 'c'
     },
     {
         title: 'Square - Social Media Plan ',
@@ -48,7 +56,9 @@ const waiting = [
         attached: 2,
         taskScore: '7/8',
         percent: 80,
+        marginTop: 0,
         daysLeft: 8,
+        id: 'd'
     },
     {
         title: 'Product Preview & Mock up for…',
@@ -57,6 +67,8 @@ const waiting = [
         taskScore: '4/5',
         percent: 95,
         daysLeft: 2,
+        marginTop: 0,
+        id: 'e'
     },
     {
         title: 'Square - Social Media Plan ',
@@ -65,6 +77,8 @@ const waiting = [
         taskScore: '7/8',
         percent: 80,
         daysLeft: 8,
+        marginTop: 0,
+        id: 'f'
     }
 ]
 
@@ -76,7 +90,9 @@ const completed = [
         taskScore: '4/5',
         percent: 95,
         daysLeft: 2,
-        status: 'completed'
+        marginTop: 0,
+        status: 'completed',
+        id: 'g'
     },
     {
         title: 'Square - Social Media Plan ',
@@ -85,7 +101,9 @@ const completed = [
         taskScore: '7/8',
         percent: 80,
         daysLeft: 8,
-        status: 'completed'
+        marginTop: 0,
+        status: 'completed',
+        id: 'h'
     },
     {
         title: 'Product Preview & Mock up for…',
@@ -94,7 +112,9 @@ const completed = [
         taskScore: '4/5',
         percent: 95,
         daysLeft: 2,
-        status: 'completed'
+        marginTop: 0,
+        status: 'completed',
+        id: 'j'
     },
     {
         title: 'Square - Social Media Plan ',
@@ -103,14 +123,26 @@ const completed = [
         taskScore: '7/8',
         percent: 80,
         daysLeft: 8,
-        status: 'completed'
+        marginTop: 0,
+        status: 'completed',
+        id: 'k'
     }
 ]
 
+const notStarted = [];
+
 export const Task = (props) => {
+    const taskRef = useRef();
     const [selectedValue, setSellectedValue] = useState('All Project');
     const [showDropDown, setShowDropDown] = useState(false);
     const history = useHistory();
+    const [inProgressTask, setInProgressTask] = useState(InProgress);
+    const [inWaitingTask, setInWaitingTask] = useState(waiting);
+    const [completedTask, setCompletedTask] = useState(completed);
+    const [notStartedTask, setNotStartedTask] = useState(notStarted);
+    const [targetedIndex, setTargetedIndex] = useState();
+    const [targetedStatus, setTargetedStatus] = useState();
+    const [taskRefState, setTaskRefState] = useState(taskRef);
 
 
 
@@ -120,11 +152,16 @@ export const Task = (props) => {
                 setShowDropDown(false);
             }
         })
+
+        return () => document.removeEventListener('click', (event) => {
+            if(!event.target.classList.contains('dropDownValue')){
+                setShowDropDown(false);
+            }
+        })
+
     }, [])
 
-    const handleChange = () => {
-
-    }
+ 
 
     const handleDropDownSelect = (value) => {
         setSellectedValue(value);
@@ -135,28 +172,180 @@ export const Task = (props) => {
         return <p className='dropDownValue' onClick={() => handleDropDownSelect(value)}>{value}</p>
     })
 
+
+    const getTaskList = (status) => {
+        switch(status){
+            case 'inProgress':
+                return inProgressTask.slice();
+
+            case 'inWaiting':
+                return inWaitingTask.slice();
+
+            case 'completed':
+                return completedTask.slice();
+
+            case 'notStarted':
+                return notStartedTask.slice();  
+
+            default:
+                return  [];
+        }
+    }
+
+
+    const setTaskListState = (status, task) => {
+        switch(status){
+            case 'inProgress':
+                setInProgressTask(task)
+                break;
+            case 'inWaiting':
+                setInWaitingTask(task);
+                break;
+            case 'completed':
+                setCompletedTask(task);
+                break;
+            case 'notStarted':
+                setNotStartedTask(task);  
+                break;  
+            default:
+                break;
+        }
+    }
+
     const handleShowDropdown = () => {
         setShowDropDown(true);
     }
 
-    const inprogressTasks = InProgress.map((task, index) => {
-        return <SingleTask key={index} task={task}/>
+    const handleDragOver = (e) => {
+        e.preventDefault();
+       
+    }
+
+    const handleDragStart = (e, id, status) => {
+        e.dataTransfer.setData('taskId', id);
+        e.dataTransfer.setData('status', status);
+    }
+
+    const handleDrop = (e, status) => {
+        const targetIndex = e.target.getAttribute('data-id');
+        const incomingIndex = e.dataTransfer.getData('taskId');
+        const inComingStatus = e.dataTransfer.getData('status');
+
+        let incomingTaskList = getTaskList(inComingStatus);
+        let targetTaskList = getTaskList(status).map((item, index) => {
+            item.marginTop = 0;
+            return item;
+        })
+
+       
+       let incomingTask = incomingTaskList.splice(parseInt(incomingIndex), 1);
+
+       if(targetIndex == null){
+        targetTaskList.splice(0, 0, incomingTask[0]);
+       }else{
+        targetTaskList.splice(parseInt(targetIndex), 0, incomingTask[0]);
+       }
+
+      
+       setTaskListState(inComingStatus, incomingTaskList);
+       setTaskListState(status, targetTaskList);
+    
+    }
+
+    const handleTaskDragOver = (e, status) => {
+        e.preventDefault();
+
+
+        const targetIndex = parseInt(e.target.getAttribute('data-id'));
+        
+        
+
+        const newTaskList = getTaskList(status).map((item, index) => {
+    
+            if(targetIndex === index){
+                item.marginTop = taskRefState?.current?.getBoundingClientRect().height;
+                console.log(item);
+                return item;
+            }
+
+            item.marginTop = 0;
+            return item;
+        })
+
+
+
+        setTaskListState(status, newTaskList); 
+    
+    }
+
+    const handleTaskDragLeave = (e, status) => {
+        e.preventDefault();
+        const newTaskList = getTaskList(status).map((item, index) => {
+            item.marginTop = 0;
+            return item;
+        })
+
+
+
+        setTaskListState(status, newTaskList); 
+    }
+
+   
+
+    const inprogressTasks = inProgressTask.map((task, index) => {
+        return <SingleTask 
+            key={index} 
+            task={task} 
+            id={index} 
+            onDragStart={(e) => handleDragStart(e, index, 'inProgress')}
+            onDragOver = {(e) => handleTaskDragOver(e, 'inProgress')}
+            onDragLeave = {(e) => handleTaskDragLeave(e, 'inProgress')}
+        />
     })
 
 
-    const waitingTasks = waiting.map((task, index) => {
-        return <SingleTask key={index} task={task}/>
+    const waitingTasks = inWaitingTask.map((task, index) => {
+        return <SingleTask 
+            key={index} 
+            id={index} 
+            task={task} 
+            onDragStart={(e) => handleDragStart(e, index, 'inWaiting')}
+            onDragOver = {(e) => handleTaskDragOver(e, 'inWaiting')}
+            onDragLeave = {(e) => handleTaskDragLeave(e, 'inWaiting')}
+        />
     })
 
-    const completedTasks = completed.map((task, index) => {
-        return <SingleTask key={index} task={task}/>
+    const completedTasks = completedTask.map((task, index) => {
+        return <SingleTask 
+            key={index} 
+            id={index} 
+            task={task} 
+            onDragStart={(e) => handleDragStart(e, index, 'completed')}
+            onDragOver = {(e) => handleTaskDragOver(e, 'completed')}
+            onDragLeave = {(e) => handleTaskDragLeave(e, 'completed')}
+        />
+    })
+
+    const notStartedTaskList = notStartedTask.map((task, index) => {
+        return <SingleTask 
+            key={index} 
+            id={index} 
+            task={task} 
+            onDragStart={(e) => handleDragStart(e, index, 'notStarted')}
+            onDragOver =  {(e) => handleTaskDragOver(e, 'notStarted')}
+            onDragLeave = {(e) => handleTaskDragLeave(e, 'notStarted')}
+        />
     })
 
     const addTask = () => {
         history.push('addTask');
     }
 
+    console.log(taskRefState);
+
     return (
+
+        <TaskContext.Provider value={{setTaskRefState, taskRefState}}>
         <>
              <SectionHeader
                 sectionName='Tasks'
@@ -179,19 +368,19 @@ export const Task = (props) => {
                         <h6>In Progress</h6>
                         <MdMoreHoriz/>
                     </StyledTaskHeader>
-                    <div style={{overflow: 'auto', maxHeight: '70vh'}}>
+                    <div onDrop={(e) => handleDrop(e, 'inProgress')} onDragOver={(e) => handleDragOver(e)} style={{padding: '5px', overflow: 'auto', maxHeight: '70vh'}}>
                         {inprogressTasks}
                     </div>
                     <StyledTaskListFooter>
                         <MdAdd/>
                     </StyledTaskListFooter>
                 </StyledTaskList>
-                <StyledTaskList>
-                    <StyledTaskHeader>
+                <StyledTaskList >
+                    <StyledTaskHeader >
                         <h6>Waiting</h6>
                         <MdMoreHoriz/>
                     </StyledTaskHeader>
-                    <div style={{overflow: 'auto', maxHeight: '70vh'}}>
+                    <div onDrop={(e) => handleDrop(e, 'inWaiting')} onDragOver={(e) => handleDragOver(e)} style={{padding: '5px', overflow: 'auto', maxHeight: '70vh'}}>
                     {waitingTasks}
                     </div>
                     <StyledTaskListFooter onClick={addTask}>
@@ -203,7 +392,7 @@ export const Task = (props) => {
                         <h6>Completed</h6>
                         <MdMoreHoriz/>
                     </StyledTaskHeader>
-                    <div style={{overflow: 'auto', maxHeight: '70vh'}}>
+                    <div onDrop={(e) => handleDrop(e, 'completed')} onDragOver={(e) => handleDragOver(e)} style={{padding: '5px', overflow: 'auto', maxHeight: '70vh'}}>
                     {completedTasks}
                     </div>
                     <StyledTaskListFooter onClick={addTask}>
@@ -211,16 +400,20 @@ export const Task = (props) => {
                     </StyledTaskListFooter>
                 </StyledTaskList>
                 <StyledTaskList>
-                    <StyledTaskHeader>
+                    <StyledTaskHeader >
                         <h6>Not Started</h6>
                         <MdMoreHoriz/>
                     </StyledTaskHeader>
+                        <div onDrop={(e) => handleDrop(e, 'notStarted')} onDragOver={(e) => handleDragOver(e)} style={{border: '1px solid red', padding: '5px', overflow: 'auto', maxHeight: '70vh'}}>
+                            {notStartedTaskList}
+                        </div>
                     <StyledTaskListFooter onClick={addTask}>
                         <MdAdd/>
                     </StyledTaskListFooter>
                 </StyledTaskList>
             </StyledTaskComponent>
-        </>
+            </>
+        </TaskContext.Provider>
     );
 };
 
@@ -237,7 +430,7 @@ const StyledTaskList = styled.div`
      border-radius: 6px;
     border: solid 1px #e2e2ea;
     flex-basis: 24%;
-    height: 100%
+    height: 100%;
 `
 
 const StyledTaskHeader = styled.div`

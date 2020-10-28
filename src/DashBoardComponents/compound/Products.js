@@ -4,17 +4,20 @@ import {ActionBar} from '../element/ActionBar';
 import {Table} from '../element/Table';
 import {ProductsTableRow} from '../element/ProductsTableRow';
 import {data} from '../atom/productsData';
-import { useHistory} from 'react-router-dom';
+import { useHistory, Route, Switch, useRouteMatch} from 'react-router-dom';
+import { DeleteModal } from '../element/DeleteModal';
+import { EditProduct } from './EditProduct';
 
 const tableTitle = ['Product name', 'Product Description', 'Action']
 
 export const Products = (props) => {
-
     const [currentData, setCurrentData] = useState([]);
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [start, setStart] = useState(1);
     const history = useHistory();
+    const {path, url} = useRouteMatch();
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   
 
     useEffect(() => {
@@ -24,8 +27,26 @@ export const Products = (props) => {
         setCurrentPage(1);
     }, [])
 
+    const handleDeletePayroll = () => {
+        setDeleteModalVisible(true)
+    } 
+
+    const onDeleteModalCancel = () => {
+        setDeleteModalVisible(false);
+    }
+
+ 
+    const addProduct = () => {
+        history.push(`addProduct`)
+    }
+
+    const editProduct = () => {
+        history.push(`${url}/editProduct`)
+    }
+
+
     const tableRow = currentData?.map((element, index) => {
-        return <ProductsTableRow data={element} key={index}/>
+        return <ProductsTableRow onEdit={editProduct} handleDelete={handleDeletePayroll} data={element} key={index}/>
     })
 
     const handlPaginationChange = (page, pageSize) => { 
@@ -38,28 +59,36 @@ export const Products = (props) => {
         setStart(start);
     }
 
-    const addProduct = () => {
-        history.push(`addProduct`)
-    }
-
+   
 
     return (
         <>
-             <SectionHeader
-                sectionName='Products'
-                sectionMessage='As of'
-                sectionDate='27 June 2020'
-            />
-            <ActionBar sectionName='Add Product' onClick={addProduct}/>
-            <Table
-                tableRow={tableRow}
-                tableTitle={tableTitle}
-                data={data}
-                handlPaginationChange={handlPaginationChange}
-                start={start}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+            <Switch>
+            <Route exact path={path}>
+                <SectionHeader
+                    sectionName='Products'
+                    sectionMessage='As of'
+                    sectionDate='27 June 2020'
+                />
+                <ActionBar sectionName='Add Product' onClick={addProduct}/>
+                <Table
+                    tableRow={tableRow}
+                    tableTitle={tableTitle}
+                    data={data}
+                    handlPaginationChange={handlPaginationChange}
+                    start={start}
+                    currentPage={currentPage}
+                    pageSize={pageSize}
+                />
+                <DeleteModal
+                    deleteModalVisible={deleteModalVisible}
+                    onDeleteModalCancel={onDeleteModalCancel}
+                />
+            </Route>
+            <Route path={`${path}/editProduct`}>
+                <EditProduct/>
+            </Route>
+        </Switch>   
         </>
     );
 };

@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+.subscription-table,
+.subscription-table th {
+    border: solid 1.1px #efedf3;
+}
+.subscription-table .all-modules {
+    border-top: solid 1.1px #efedf3;
+}
+.subscription-table {
+    width: 70%;
+    border-collapse: collapse;
+}
+.subscription-table th {
+    text-align: left;
+    padding: 40px 20px 20px 50px;
+}
+.subscription-table th h6 {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: -0.18px;
+    color: #13254a;
+}
+.subscription-table .subscription {
+    font-size: 30px;
+    letter-spacing: -0.27px;
+}
+.subscription-table td {
+    border-left: solid 1.1px #efedf3;
+    border-right: solid 1.1px #efedf3;
+    padding: 15px 15px 15px 50px;
+}
+.subscription-table td p {
+    font-size: 24px;
+    font-weight: 500;
+    color: #13254a;
+}
+.subscription-table tbody tr:first-child td {
+    padding-top: 20px;
+}
+.subscription-table .finance td:first-child {
+    padding-bottom: 20px;
+}
+.subscription-table .all-modules td {
+    padding-bottom: 40px;
+}
+.subscription-table td p.additional {
+    font-size: 20px;
+}
+.subscription-table td p.subscribers {
+    font-size: 18px;
+    margin-top: 15px;
+}
+.subscription-table button {
+    border-radius: 8px;
+    background-color: #6236ff;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #fff;
+    padding: 10px 30px;
+    border: none;
+}

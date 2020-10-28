@@ -14,11 +14,11 @@ export const EmployeeInfoTableRow = (props) => {
             <td>{props.data.subsidiary}</td>
             <td>{props.data.joiningDate}</td>
             <td>
-                <a href='#'>View</a>
+                <a style={{color: 'blue'}} onClick= {props.view}>View</a>
             </td> 
-            <td>
-                <a href='#'>Invite</a>
-            </td> 
+           {!props.showView &&  <td>
+                <a style={{color: 'blue'}}>Invite</a>
+            </td> }
         </TableRow>
     );
 };
